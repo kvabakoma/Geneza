@@ -1,0 +1,14 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background: darkslategrey
+}
+#game {
+    /* border:2px solid red; */
+}
+canvas {
+    /* border: 2px solid blue; */
+}
