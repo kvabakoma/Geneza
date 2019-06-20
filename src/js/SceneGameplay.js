@@ -12,8 +12,8 @@ var SceneGameplay = new Phaser.Scene('SceneGameplay');
 SceneGameplay.init = function() {
     this.races = ['AHRIMAN', 'ANIMA', 'ENTROPIA', 'GENEZA', 'MATERIA', 'SAPIENS', 'SYSTEMA'];
     this.videos = ['AHRIMAN', 'ANIMA', 'ENTROPIA', 'GENEZA', 'MATERIA', 'SAPIENS', 'SYSTEMA'];
-    this.bodyparts = {'HEAD':'', 'ARM LEFT':'', 'ARM right':'', 'LEG LEFT':'', 'LEG RIGHT':'', 'BODY':'', 'CROUCH':''};
-    this.myStatics = [];
+    this.bodyparts = {'HEAD':'SAPIENS', 'ARM LEFT':'SAPIENS', 'ARM RIGHT':'SAPIENS', 'LEG LEFT':'SAPIENS', 'LEG RIGHT':'SAPIENS', 'BODY':'SAPIENS', 'CROUCH':'SAPIENS'};
+    this.body = {};
 /*     this.bodyanims = [];
     console.log(this.bodyanims) */
     
@@ -89,26 +89,33 @@ SceneGameplay.setupLevel = function() {
     .setScale(1.08,1.08);
     this.sceneFrame.play('frameAnim');
     
-    this.bodyHEAD = this.add.sprite(game.config.width*.502, game.config.height * .182, 'SAPIENS', 'HEAD/HEAD_1.png')
-    .setOrigin(.5,.5);
+    this.body['HEAD'] = this.add.sprite(game.config.width*.502, game.config.height * .182, 'SAPIENS', 'HEAD/HEAD_1.png')
+    .setOrigin(.5,.5)
+    .setDepth(7);
 
-    this.bodyLeftArm = this.add.sprite(game.config.width*.26, game.config.height * .357, 'SAPIENS', 'ARM LEFT/ARM LEFT_1.png')
-    .setOrigin(.5,.5);
+    this.body['ARM LEFT'] = this.add.sprite(game.config.width*.26, game.config.height * .357, 'SAPIENS', 'ARM LEFT/ARM LEFT_1.png')
+    .setOrigin(.5,.5)
+    .setDepth(3);
 
-    this.bodyRightArm = this.add.sprite(game.config.width*.775, game.config.height * .478, 'SAPIENS', 'ARM RIGHT/ARM right_1.png')
-    .setOrigin(.5,.5);
+    this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, 'SAPIENS', 'ARM RIGHT/ARM right_1.png')
+    .setOrigin(.5,.5)
+    .setDepth(4);
 
-    this.bodyBody = this.add.sprite(game.config.width*.503, game.config.height * .289, 'SAPIENS', 'BODY/BODY_1.png')
-    .setOrigin(.5,.5);
+    this.body['BODY'] = this.add.sprite(game.config.width*.503, game.config.height * .289, 'SAPIENS', 'BODY/BODY_1.png')
+    .setOrigin(.5,.5)
+    .setDepth(6);
 
-    this.bodyCrouch = this.add.sprite(game.config.width*.503, game.config.height * .518, 'SAPIENS', 'CROUCH/CROUCH_1.png')
-    .setOrigin(.5,.5);
+    this.body['CROUCH'] = this.add.sprite(game.config.width*.503, game.config.height * .518, 'SAPIENS', 'CROUCH/CROUCH_1.png')
+    .setOrigin(.5,.5)
+    .setDepth(5);
 
-    this.bodyLegLeft = this.add.sprite(game.config.width*.463, game.config.height * .735, 'SAPIENS', 'LEG LEFT/LEG LEFT_1.png')
-    .setOrigin(.5,.5);
+    this.body['LEG LEFT'] = this.add.sprite(game.config.width*.463, game.config.height * .735, 'SAPIENS', 'LEG LEFT/LEG LEFT_1.png')
+    .setOrigin(.5,.5)
+    .setDepth(1);
 
-    this.bodyLegRight = this.add.sprite(game.config.width*.549, game.config.height * .735, 'SAPIENS', 'LEG RIGHT/LEG RIGHT_1.png')
-    .setOrigin(.5,.5);
+    this.body['LEG RIGHT'] = this.add.sprite(game.config.width*.549, game.config.height * .735, 'SAPIENS', 'LEG RIGHT/LEG RIGHT_1.png')
+    .setOrigin(.5,.5)
+    .setDepth(2);
 
     /* this.template = this.add.image(game.config.width * .5, game.config.height*.5, 'TEMPLATE')
     .setOrigin(.5,.5); */
@@ -116,32 +123,31 @@ SceneGameplay.setupLevel = function() {
 
 SceneGameplay.setupKeyboardControlls = function () {
     this.input.keyboard.on('keydown-' + 'A', function (event) { 
-        this.buttonPressed(0);
+        this.buttonPressed(Object.keys(this.bodyparts)[0]);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'S', function (event) { 
-        this.buttonPressed(1);
+        this.buttonPressed(Object.keys(this.bodyparts)[1]);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'D', function (event) { 
-        this.buttonPressed(2);
+        this.buttonPressed(Object.keys(this.bodyparts)[2]);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'F', function (event) { 
-        this.buttonPressed(3);
+        this.buttonPressed(Object.keys(this.bodyparts)[3]);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'G', function (event) { 
-        this.buttonPressed(4);
+        this.buttonPressed(Object.keys(this.bodyparts)[4]);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'H', function (event) { 
-        this.buttonPressed(5);
+        this.buttonPressed(Object.keys(this.bodyparts)[5]);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'J', function (event) { 
-        this.buttonPressed(6);
+        this.buttonPressed(Object.keys(this.bodyparts)[6]);
     }.bind(this));
 }
 
 SceneGameplay.buttonPressed = function (i) {
-    this.bodyparts[i] = this.races[(this.races.indexOf(this.bodyparts[i]) + 1) % this.races.length]
-    console.log(this.bodyparts)
-    console.log(checkIfEqual(this.bodyparts));
+    console.log(i)
+    this.body[i].play('bpanim-'+this.bodyparts[i]+'-'+i);
 }
 
 function checkIfEqual (bodyparts) {
