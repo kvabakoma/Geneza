@@ -301,22 +301,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01611.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01615.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01619.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01623.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01628.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01632.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01636.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01640.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01644.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01648.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01653.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01657.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01661.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01665.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01669.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_01673.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_1.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_10.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_11.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_12.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_13.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_14.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_15.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_16.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_2.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_3.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_4.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_5.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_6.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_7.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_8.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/MATERIA/BODY/BODY_9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

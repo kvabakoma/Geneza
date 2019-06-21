@@ -273,23 +273,23 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00352.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00355.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00358.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00362.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00365.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00368.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00372.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00375.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00378.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00382.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00385.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00388.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00392.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00395.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00398.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00402.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_00405.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_1.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_10.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_11.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_12.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_13.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_14.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_15.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_16.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_17.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_2.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_3.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_4.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_5.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_6.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_7.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_8.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/SYSTEMA/ARM RIGHT/ARM right_9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

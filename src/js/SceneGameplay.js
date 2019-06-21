@@ -10,24 +10,13 @@
 var SceneGameplay = new Phaser.Scene('SceneGameplay');
 
 SceneGameplay.init = function() {
-    this.races = ['AHRIMAN', 'ANIMA', 'ENTROPIA', 'GENEZA', 'MATERIA', 'SAPIENS', 'SYSTEMA'];
-    this.videos = ['AHRIMAN', 'ANIMA', 'ENTROPIA', 'GENEZA', 'MATERIA', 'SAPIENS', 'SYSTEMA'];
+    this.races = ['SAPIENS','SYSTEMA', 'ENTROPIA', 'AHRIMAN','MATERIA','ANIMA','GENEZA' ];
     this.bodyparts = {'HEAD':'SAPIENS', 'ARM LEFT':'SAPIENS', 'ARM RIGHT':'SAPIENS', 'LEG LEFT':'SAPIENS', 'LEG RIGHT':'SAPIENS', 'BODY':'SAPIENS', 'CROUCH':'SAPIENS'};
     this.body = {};
-/*     this.bodyanims = [];
-    console.log(this.bodyanims) */
-    
-    // randomize starting body parts
-    /* for (var property in this.bodyparts) {
-        if (this.bodyparts.hasOwnProperty(property)) {
-            this.bodyparts[i] = getRandomElement(this.races);
-        }
-    }
-    console.log(this.bodyparts['HEAD']) */
+    this.videoIsPlaying = false;
 }
 
 SceneGameplay.preload = function() {
-    // console.log("In Scene: SceneGameplay")  
     this.cameras.main.setBackgroundColor('#000');
     this.load.image('TEMPLATE', 'assets/img/TAMPLATE_transparent_SAPIENS.png');
     this.load.atlas('frame', 'assets/img/frame.png', 'assets/img/frame.json');
@@ -64,17 +53,15 @@ SceneGameplay.setupAnims = function() {
     });
     
     for (i = 0; i < this.races.length; i++) {
-        // console.log('outer loop');
         for(j = 0; j < Object.keys(this.bodyparts).length; j++) {            
             var bpart = Object.keys(this.bodyparts)[j];
-            // console.log(bpart + "/"+bpart+"_")
             this.anims.create({
                 key: 'bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j],
                 frames: this.anims.generateFrameNames(this.races[i], {
                     start: 1, end: 16, 
                     prefix: bpart + "/"+bpart+"_", suffix: '.png'
                 }),
-                frameRate: 12,
+                frameRate: 8,
                 repeat: -1
             });
         }        
@@ -92,33 +79,34 @@ SceneGameplay.setupLevel = function() {
     this.body['HEAD'] = this.add.sprite(game.config.width*.502, game.config.height * .182, 'SAPIENS', 'HEAD/HEAD_1.png')
     .setOrigin(.5,.5)
     .setDepth(7);
-
+    
     this.body['ARM LEFT'] = this.add.sprite(game.config.width*.26, game.config.height * .357, 'SAPIENS', 'ARM LEFT/ARM LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(3);
-
-    this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, 'SAPIENS', 'ARM RIGHT/ARM right_1.png')
+    
+    this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, 'SAPIENS', 'ARM RIGHT/ARM RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(4);
-
+    
     this.body['BODY'] = this.add.sprite(game.config.width*.503, game.config.height * .289, 'SAPIENS', 'BODY/BODY_1.png')
     .setOrigin(.5,.5)
     .setDepth(6);
-
+    
     this.body['CROUCH'] = this.add.sprite(game.config.width*.503, game.config.height * .518, 'SAPIENS', 'CROUCH/CROUCH_1.png')
     .setOrigin(.5,.5)
     .setDepth(5);
-
+    
     this.body['LEG LEFT'] = this.add.sprite(game.config.width*.463, game.config.height * .735, 'SAPIENS', 'LEG LEFT/LEG LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(1);
-
+    
     this.body['LEG RIGHT'] = this.add.sprite(game.config.width*.549, game.config.height * .735, 'SAPIENS', 'LEG RIGHT/LEG RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(2);
-
+    
     /* this.template = this.add.image(game.config.width * .5, game.config.height*.5, 'TEMPLATE')
     .setOrigin(.5,.5); */
+    
 }
 
 SceneGameplay.setupKeyboardControlls = function () {
@@ -146,14 +134,30 @@ SceneGameplay.setupKeyboardControlls = function () {
 }
 
 SceneGameplay.buttonPressed = function (i) {
-    console.log(i)
+    if (this.videoIsPlaying) return;
+    this.bodyparts[i] = this.races[(this.races.indexOf(this.bodyparts[i]) + 1) % this.races.length] 
+    if (checkIfEqual (this.bodyparts) ) {
+        console.log('starting video'); 
+        document.getElementById('my-video').classList.remove('display-none');
+        document.getElementById('my-video').classList.add('display-block');
+        this.videoIsPlaying = true;
+        videoPlayer.play();
+    }
     this.body[i].play('bpanim-'+this.bodyparts[i]+'-'+i);
+    
+}
+
+SceneGameplay.endVideo = function() {
+    SceneGameplay.videoIsPlaying = false;
+    console.log('video ended');
+    document.getElementById('my-video').classList.remove('display-block');
+    document.getElementById('my-video').classList.add('display-none');
 }
 
 function checkIfEqual (bodyparts) {
     var result = true;
-    for (i = 1; i < bodyparts.length; i++) {
-        if (bodyparts[i] != bodyparts[0]) result = false;
+    for (i = 1; i < Object.values(bodyparts).length; i++) {
+        if (Object.values(bodyparts)[i] != Object.values(bodyparts)[0]) result = false;
     }
     return result;
 }
@@ -161,3 +165,8 @@ function checkIfEqual (bodyparts) {
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random()*arr.length)];
 }
+
+function photoEpilepsy() {
+    
+}
+

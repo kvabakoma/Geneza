@@ -273,22 +273,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_1.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_10.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_11.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_12.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_13.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_14.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_15.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_16.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_2.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_3.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_4.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_5.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_6.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_7.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_8.png</key>
-            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM RIGHT/ARM right_9.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_1.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_10.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_11.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_12.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_13.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_14.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_15.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_16.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_2.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_3.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_4.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_5.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_6.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_7.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_8.png</key>
+            <key type="filename">//roboserver/homes/kvaba/2019/Geneza/AHRIMAN/ARM right/ARM right_9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

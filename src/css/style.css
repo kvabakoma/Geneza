@@ -4,11 +4,27 @@ body, html {
     padding: 0;
     margin: 0;
     overflow: hidden;
-    background: darkslategrey
+    background: black;
 }
 #game {
-    /* border:2px solid red; */
+    position: relative;
 }
 canvas {
     /* border: 2px solid blue; */
+}
+#my-video {
+    z-index: 2;
+    position: absolute;
+    left:0;
+    top:0;
+}
+.display-none {
+    display: none !important;
+}
+.display-block {
+    display: block;
+}
+.video-js {
+    width: 100%;
+    height: 100%;
 }

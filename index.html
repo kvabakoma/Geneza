@@ -2,21 +2,23 @@
 
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137885854-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    
-    gtag('config', 'UA-137885854-1');
-  </script> -->
+  <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137885854-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      gtag('config', 'UA-137885854-1');
+    </script> 
+  -->
   
   
   <title>Geneza</title>
-  <meta name="description" content="Geneza by Nikola Radulovikj">
-  <meta name="author" content="kvaba.com">
+  <meta name="description" content="Geneza by Nikola Radulovikj" />
+  <meta name="author" content="kvaba.com" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.17.0/phaser.min.js"></script>
@@ -24,36 +26,37 @@
   <script src="src/js/SceneGameplay.js"></script>
   <script src="src/js/main.js"></script>
   
-  <link rel="stylesheet" type="text/css" href="src/css/style.css">
+  <link rel="stylesheet" type="text/css" href="src/css/style.css" />
+  <link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet" />
   
 </head>
 
 <body>
-  <div id="game"></div>
-  <div id="rotate-phone"><img src="">&nbsp;</div>
+  <div id="game">
+    <video id='my-video' class='video-js display-none' width='1080' height='1080' data-setup='{
+      "controls": false, 
+      "autoplay": false, 
+      "preload": "auto",
+      "playsinline": true,
+      "muted": true
+    }'>
+    <source src='assets/videos/AHRIMAN.mp4' type='video/mp4'>
+      <source src='MY_VIDEO.webm' type='video/webm'>
+        <p class='vjs-no-js'>To view this video please enable JavaScript, and consider upgrading to a web browser that <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a></p>
+      </video>
+    </div>
+    <div id="rotate-phone"><img src="">&nbsp;</div>
+    
+    <script src='https://vjs.zencdn.net/7.5.5/video.js'></script>
+    <script>
+      var videoPlayer;
+      videojs('my-video').ready(function() {
+        videoPlayer = this;
+      });
+      videojs('my-video').on('ended', function() {
+        SceneGameplay.endVideo();
+      });
+    </script>
+  </body>
+  </html>
   
-  <script>
-    
-    $(document).ready(function () {
-      toggleRotateImage();
-      
-    });
-    
-    window.addEventListener("resize", function (event) {
-      setTimeout(function(){
-        toggleRotateImage()
-      }, 150);
-    });
-    
-    function toggleRotateImage() {
-      if (window.innerWidth > window.innerHeight) {
-        document.getElementById("rotate-phone").style.visibility = 'hidden';
-      } else {
-        document.getElementById("rotate-phone").style.visibility = 'visible';
-      }
-    }
-    
-  </script>
-  
-</body>
-</html>
