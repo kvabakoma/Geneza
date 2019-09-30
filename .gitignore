@@ -1,1 +1,3 @@
-assets/videos/
+public/assets/videos/
+.idea/
+node_modules/
