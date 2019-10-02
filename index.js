@@ -11,20 +11,22 @@ const path = require('path')
 const sockets = require('./tools/sockets')
 
 
-sockets.handelSocketConnections(app,expressWs)
-sockets.setSocketServer(expressWs)
 
 
+/*
 app.use(function (req, res, next) {
   console.log('middleware');
   req.testing = 'testing';
   return next();
-});
+});*/
 
 app.get('/', function(req, res){
   res.sendFile(__dirname +'/public/game.html');
 });
 
+app.get('/test', function(req, res){
+  res.sendFile(__dirname +'/public/test.html');
+});
 app.ws('/', function(ws, req) {
   ws.on('message', function(msg) {
     console.log(msg);
@@ -38,3 +40,5 @@ app.listen(3000,function () {
 
 
 });
+sockets.handelSocketConnections(app,expressWs)
+sockets.setSocketServer(expressWs)

@@ -1,23 +1,7 @@
 /**
  * Created by Kvaba on 2/26/2019.
  */
-var exampleSocket;
 
-$(document).ready(function () {
-  //  exampleSocket = new WebSocket("ws://localhost:1337/client");
-  exampleSocket = new WebSocket("ws://localhost:3000/ws/geneza");
-  exampleSocket.onmessage = function (event) {
-    let message = JSON.parse(event.data)
-     console.log(message)
-    if(message['type']&&message['type']=='body-move'){
-      SceneGameplay.adjustBody(message['data'])
-
-    }
-    //console.log(SceneGameplay.buttonPressed('HEAD'))
-    //  handelSocketMessage(message)
-  }
-
-})
 
 function handelSocketMessage(msg) {
     if (msg['type'] && msg['type'] == 'connect') {

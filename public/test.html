@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.17.0/phaser.min.js"></script>
+  <script src="src/js/socketImplamentationTEST.js"></script>
+</head>
+<body>
+<input id="test" type="text">
+<button onclick="sendToSocket()">send to server </button>
+
+<script>
+  var testSocket;
+
+  $(document).ready(function () {
+    //  exampleSocket = new WebSocket("ws://localhost:1337/client");
+    testSocket = new WebSocket("ws://localhost:3000/ws/test");
+    testSocket.onmessage = function (event) {
+      let message = JSON.parse(event.data)
+      console.log(message)
+      //  handelSocketMessage(message)
+    }
+
+  })
+ function sendToSocket() {
+   var testMessage = document.getElementById('test').value
+    console.log(testMessage)
+   testSocket.send(testMessage);
+ }
+
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 0. declare races: races[ahriman, ]
 1. declare videos array: videos[ahriman, anima...]
 2. declare bodyparts array: bodyparts[left_hand] = ahriman
-3. load spritesheets: left_hand[0] = ahriman anim; left_hand[1] = 
+3. load spritesheets: left_hand[0] = ahriman anim; left_hand[1] =
 4. write input controller
 5. on bodypart change, check if the same, if different - change, if different - check if all parts are with the same race and play video
 */
@@ -38,35 +38,37 @@ SceneGameplay.create = function() {
 }
 
 SceneGameplay.update = function() {
-    
+
 }
 
 SceneGameplay.setupAnims = function() {
     this.anims.create({
         key: 'frameAnim',
         frames: this.anims.generateFrameNames('frame', {
-            start: 1, end: 3, 
+            start: 1, end: 3,
             prefix: 'FRAME_0', suffix: '.png'
         }),
         frameRate: 12,
         repeat: -1
     });
-    
+
     for (i = 0; i < this.races.length; i++) {
-        for(j = 0; j < Object.keys(this.bodyparts).length; j++) {            
+        for(j = 0; j < Object.keys(this.bodyparts).length; j++) {
             var bpart = Object.keys(this.bodyparts)[j];
+            console.log('bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
             this.anims.create({
+
                 key: 'bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j],
                 frames: this.anims.generateFrameNames(this.races[i], {
-                    start: 1, end: 16, 
+                    start: 1, end: 16,
                     prefix: bpart + "/"+bpart+"_", suffix: '.png'
                 }),
                 frameRate: 8,
                 repeat: -1
             });
-        }        
+        }
     }
-    console.log(this.anims);        
+    console.log(this.anims);
 }
 
 SceneGameplay.setupLevel = function() {
@@ -75,77 +77,118 @@ SceneGameplay.setupLevel = function() {
     .setPosition(game.config.width*.5)
     .setScale(1.08,1.08);
     this.sceneFrame.play('frameAnim');
-    
+
     this.body['HEAD'] = this.add.sprite(game.config.width*.502, game.config.height * .182, 'SAPIENS', 'HEAD/HEAD_1.png')
     .setOrigin(.5,.5)
     .setDepth(7);
-    
+
     this.body['ARM LEFT'] = this.add.sprite(game.config.width*.26, game.config.height * .357, 'SAPIENS', 'ARM LEFT/ARM LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(3);
-    
+
     this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, 'SAPIENS', 'ARM RIGHT/ARM RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(4);
-    
+
     this.body['BODY'] = this.add.sprite(game.config.width*.503, game.config.height * .289, 'SAPIENS', 'BODY/BODY_1.png')
     .setOrigin(.5,.5)
     .setDepth(6);
-    
+
     this.body['CROUCH'] = this.add.sprite(game.config.width*.503, game.config.height * .518, 'SAPIENS', 'CROUCH/CROUCH_1.png')
     .setOrigin(.5,.5)
     .setDepth(5);
-    
+
     this.body['LEG LEFT'] = this.add.sprite(game.config.width*.463, game.config.height * .735, 'SAPIENS', 'LEG LEFT/LEG LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(1);
-    
+
     this.body['LEG RIGHT'] = this.add.sprite(game.config.width*.549, game.config.height * .735, 'SAPIENS', 'LEG RIGHT/LEG RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(2);
-    
+
     /* this.template = this.add.image(game.config.width * .5, game.config.height*.5, 'TEMPLATE')
     .setOrigin(.5,.5); */
-    
+
 }
 
 SceneGameplay.setupKeyboardControlls = function () {
-    this.input.keyboard.on('keydown-' + 'A', function (event) { 
+    this.input.keyboard.on('keydown-' + 'A', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[0]);
     }.bind(this));
-    this.input.keyboard.on('keydown-' + 'S', function (event) { 
+    this.input.keyboard.on('keydown-' + 'S', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[1]);
     }.bind(this));
-    this.input.keyboard.on('keydown-' + 'D', function (event) { 
+    this.input.keyboard.on('keydown-' + 'D', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[2]);
     }.bind(this));
-    this.input.keyboard.on('keydown-' + 'F', function (event) { 
+    this.input.keyboard.on('keydown-' + 'F', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[3]);
     }.bind(this));
-    this.input.keyboard.on('keydown-' + 'G', function (event) { 
+    this.input.keyboard.on('keydown-' + 'G', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[4]);
     }.bind(this));
-    this.input.keyboard.on('keydown-' + 'H', function (event) { 
+    this.input.keyboard.on('keydown-' + 'H', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[5]);
     }.bind(this));
-    this.input.keyboard.on('keydown-' + 'J', function (event) { 
+    this.input.keyboard.on('keydown-' + 'J', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[6]);
     }.bind(this));
 }
 
 SceneGameplay.buttonPressed = function (i) {
+     console.log(i)
     if (this.videoIsPlaying) return;
-    this.bodyparts[i] = this.races[(this.races.indexOf(this.bodyparts[i]) + 1) % this.races.length] 
+    this.bodyparts[i] = this.races[(this.races.indexOf(this.bodyparts[i]) + 1) % this.races.length]
     if (checkIfEqual (this.bodyparts) ) {
-        console.log('starting video'); 
+       /* console.log('starting video');
         document.getElementById('my-video').classList.remove('display-none');
         document.getElementById('my-video').classList.add('display-block');
         this.videoIsPlaying = true;
-        videoPlayer.play();
+        videoPlayer.play();*/
     }
+    console.log('bpanim-'+this.bodyparts[i]+'-'+i)
     this.body[i].play('bpanim-'+this.bodyparts[i]+'-'+i);
-    
+
 }
+
+SceneGameplay.adjustBody=function (newBodyParts) {
+  console.log('ADJUSTING...')
+  if(Object.keys(newBodyParts).length > 0){
+    Object.keys(newBodyParts).forEach(function (key, index) {
+      console.log(key,newBodyParts[key])
+      if (newBodyParts[key] ) {
+        SceneGameplay.bodyparts[key] = newBodyParts[key]
+        console.log(SceneGameplay.bodyparts)
+        SceneGameplay.body[key].visible = true
+        console.log('bpanim-'+newBodyParts[key]+'-'+key)
+        SceneGameplay.body[key].play('bpanim-'+newBodyParts[key]+'-'+key);
+      } else {
+        console.log('EMPTY')
+        SceneGameplay.bodyparts[key] = 'EMPTY'
+        SceneGameplay.body[key].visible = false
+      }
+
+    });
+    if (checkIfEqual (this.bodyparts) ) {
+      console.log('starting video');
+
+      this.videoIsPlaying = true;
+        var videoSrc = '/assets/videos/'+ this.bodyparts["HEAD"]+'.mp4'
+
+       videoPlayer.src(videoSrc)
+      setTimeout(function () {
+        document.getElementById('my-video').classList.remove('display-none');
+        document.getElementById('my-video').classList.add('display-block');
+        videoPlayer.play();
+      },1000)
+
+
+    }
+  }
+
+
+}
+
 
 SceneGameplay.endVideo = function() {
     SceneGameplay.videoIsPlaying = false;
@@ -167,6 +210,6 @@ function getRandomElement(arr) {
 }
 
 function photoEpilepsy() {
-    
+
 }
 
