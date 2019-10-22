@@ -9,10 +9,12 @@ $(document).ready(function () {
   exampleSocket.onmessage = function (event) {
     let message = JSON.parse(event.data)
      console.log(message)
+
     if(message['type']&&message['type']=='body-move'){
       SceneGameplay.adjustBody(message['data'])
-
     }
+
+
     //console.log(SceneGameplay.buttonPressed('HEAD'))
     //  handelSocketMessage(message)
   }

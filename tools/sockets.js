@@ -36,11 +36,7 @@ module.exports = {
 
 
       try {
-        var data = {
-          type: 'body-move',
-          data: prevCommand
-        }
-        ws.send(JSON.stringify(data))
+        ws.send(JSON.stringify('CONNECTED'))
 
       } catch (error) {
 
@@ -68,10 +64,11 @@ module.exports = {
 }
 
 
-function handelBodyChange(comand) {
+function handelBodyChange(comand,inital) {
   console.log(comand)
   var cmd = comand.split('')
-  var changed = getDiff(prevCommand, cmd)
+
+  var changed = getDiff(prevCommand, cmd,inital)
   prevCommand = cmd
   var parts = {}
   console.log('OBJECT LEN')
@@ -96,12 +93,17 @@ function handelBodyChange(comand) {
   sendToConnectedSocket(JSON.stringify(data), 'geneza')
 }
 
-function getDiff(prev, current) {
+function getDiff(prev, current,initial) {
   var diff = {}
   for (var i = 0; i < prev.length; i++) {
-    if (prev[i] != current[i]) {
+    if(!initial){
+      if (prev[i] != current[i]) {
+        diff[i] = current[i]
+      }
+    } else{
       diff[i] = current[i]
     }
+
 
   }
   return diff
@@ -138,6 +140,7 @@ function handelClientConnection(ws, req) {
   let id = req.params.id
   ws.id = id
   console.info('DEVICE CONNECT ', id)
+  handelBodyChange(prevCommand.join(''),true)
   ws.closed = false
 }
 
