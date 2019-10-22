@@ -151,11 +151,7 @@ function handelClientConnection(ws, req) {
   let id = req.params.id
   ws.id = id
   console.info('DEVICE CONNECT ', id)
-  setTimeout(function () {
-    handelBodyChange(prevCommand.join(''),true)
-  },2000)
-
-
+  handelBodyChange(prevCommand.join(''),true)
 
   ws.closed = false
 }

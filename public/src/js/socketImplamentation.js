@@ -3,12 +3,12 @@
  */
 var exampleSocket;
 
-$(document).ready(function () {
+function initSocket(){
   console.log("location.host",location.host)
   exampleSocket = new WebSocket("ws://"+location.host+"/ws/geneza");
   exampleSocket.onmessage = function (event) {
     let message = JSON.parse(event.data)
-     console.log(message)
+      console.log(message)
 
     if(message['type']&&message['type']=='body-move'){
       console.log(SceneGameplay)
@@ -18,12 +18,9 @@ $(document).ready(function () {
       console.log(SceneGameplay)
       SceneGameplay.adjustBody(message['data'],true)
     }
-
-    //console.log(SceneGameplay.buttonPressed('HEAD'))
-    //  handelSocketMessage(message)
   }
+}
 
-})
 
 function handelSocketMessage(msg) {
     if (msg['type'] && msg['type'] == 'connect') {
