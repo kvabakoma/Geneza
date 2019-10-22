@@ -33,6 +33,7 @@ SceneGameplay.create = function() {
     console.log("in SceneGameplay")
     this.scene.bringToTop('SceneGameplay'); // BRING GAMEPLAY SCENE TO TOP AFTER THE ASSETS HAVE LOADED
     this.setupAnims();
+    this.setupSounds();
     this.setupLevel();
     this.setupKeyboardControlls();
 }
@@ -69,6 +70,18 @@ SceneGameplay.setupAnims = function() {
         }
     }
     console.log(this.anims);
+}
+
+SceneGameplay.setupSounds = function () {
+    for (i = 0; i < this.races.length; i++) {
+        for(j = 0; j < Object.keys(this.bodyparts).length; j++) {
+            if (this.races[i].indexOf('ENTROPIA') >= 0) {
+                // console.log('sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
+                this.load.audio('sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j], 'assets/sounds/sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j]+'.wav');  // urls: an array of file url
+                // this.sound.play('sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
+            }
+        }
+    }
 }
 
 SceneGameplay.setupLevel = function() {
