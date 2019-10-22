@@ -36,7 +36,11 @@ module.exports = {
 
 
       try {
-        ws.send(JSON.stringify('CONNECTED'))
+        var data = {
+          type: 'body-move',
+          data: prevCommand
+        }
+        ws.send(JSON.stringify(data))
 
       } catch (error) {
 
