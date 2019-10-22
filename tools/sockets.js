@@ -105,18 +105,22 @@ function getDiff(prev, current) {
 
 function sendToConnectedSocket(data, socketId, ind) {
 
-  let socket = getSocketConnectionById(socketId)
-  if (socket)
-    socket.send(data)
+  let sockets = getSocketConnectionById(socketId)
+  if (sockets.length){
+    sockets.forEach((socket, index)=>{
+      socket.send(data)
+    })
+  }
+
 
 }
 
 function getSocketConnectionById(id) {
   let clients = socketsInstance.getWss('/').clients
-  let socket = false
+  let socket = []
   clients.forEach(function (client) {
     if (client.id == id) {
-      socket = client
+      socket.push(client)
     }
   })
 
