@@ -177,7 +177,7 @@ SceneGameplay.adjustBody=function (newBodyParts) {
         document.getElementById('my-video').classList.remove('display-none');
         document.getElementById('my-video').classList.add('display-block');
         videoPlayer.play();
-        videoPlayer.muted(false)
+       // videoPlayer.muted(false)
     console.log(videoPlayer)
       },1000)
 
