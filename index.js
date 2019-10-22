@@ -3,7 +3,7 @@
  */
 
 
-
+const bodyParser = require('body-parser')
 const express = require('express');
 const app = express();
 const expressWs = require('express-ws')(app);
@@ -19,11 +19,16 @@ app.use(function (req, res, next) {
   req.testing = 'testing';
   return next();
 });*/
-
+app.use(bodyParser.json())
 app.get('/', function(req, res){
   res.sendFile(__dirname +'/public/game.html');
 });
-
+app.post('/cmd', function(req, res){
+  let cmd = req.body.cmd
+  sockets.changeBody(''+cmd)
+  res.send({success:true})
+  console.log(cmd)
+});
 app.get('/test', function(req, res){
   res.sendFile(__dirname +'/public/test.html');
 });

@@ -9,7 +9,7 @@ var races = ['SAPIENS', 'SYSTEMA', 'ENTROPIA', 'AHRIMAN', 'MATERIA', 'ANIMA', 'G
 var bodyparts = ['HEAD', 'ARM LEFT', 'ARM RIGHT', 'LEG LEFT', 'LEG RIGHT', 'BODY', 'CROUCH'];
 var prevCommand = [1, 1, 1, 1, 1, 1, 1]
 module.exports = {
-
+  changeBody:handelBodyChange,
   getSockets: GetAllSockets,
   sendToSocket: sendToConnectedSocket,
   getSocketById: getSocketConnectionById,
@@ -48,34 +48,19 @@ module.exports = {
 
 
       ws.on('message', function (msg) {
-        /* if(ws.id==123||ws.id==124){
-         console.log('INCOMING MSG : ', msg)
-         }*/
-
-        console.log(ws.id)
         if (ws.id == 'test') {
           handelBodyChange(msg)
         }
-
-
       });
       ws.on('close', function () {
         console.log('CLOSE CONNECTION ', ws.id)
         if (pingInterval) {
           clearInterval(pingInterval)
         }
-
         delete connections[ws.id]
-
       });
-
-
     });
-
-
   }
-
-
 }
 
 
@@ -104,7 +89,7 @@ function handelBodyChange(comand) {
   }
   console.log('CHANGED')
   console.log(data)
-  sendToConnectedSocket(JSON.stringify(data),'geneza')
+  sendToConnectedSocket(JSON.stringify(data), 'geneza')
 }
 
 function getDiff(prev, current) {
@@ -121,54 +106,9 @@ function getDiff(prev, current) {
 function sendToConnectedSocket(data, socketId, ind) {
 
   let socket = getSocketConnectionById(socketId)
-  if(socket)
-  socket.send(data)
-  /* if(socket && !socket.closed && socket.id!='client' ){
-   if(globals.UNLOCK_TIMERS[socket.id]){
-   clearTimeout(globals.UNLOCK_TIMERS[socket.id])
-   startTimer(socket)
-   }else{
-   startTimer(socket)
+  if (socket)
+    socket.send(data)
 
-   }
-   }
-   console.log('SEND TO SOCKET', socket.id, socket.closed)
-   if (socketId == 'client') {
-   if (connections['client']) {
-   connections['client'].forEach(function (client) {
-   try {
-
-   client.send(JSON.stringify(data))
-   } catch (error) {
-   Log.error(error.message, 'client')
-   if (client) {
-   connections['client'].splice(client.ind, 1);
-   }
-
-   }
-
-   });
-   }
-
-   } else if (socket && socket.id) {
-   console.log('IS SOCKET COLOSED ', socket.id, socket.closed)
-   if (!socket.closed) {
-   try {
-   socket.send(data)
-   socket.closed = true;
-   } catch (error) {
-   Log.error(error.message, socket.id)
-   }
-   } else {
-   Log.info('Socket is not available', socket.id)
-
-   }
-
-
-   } else {
-   Log.info('SOCKET IS NOT CONNECTED', socket.id)
-
-   }*/
 }
 
 function getSocketConnectionById(id) {
@@ -189,11 +129,8 @@ function getSocketConnectionById(id) {
 function handelClientConnection(ws, req) {
   let id = req.params.id
   ws.id = id
-
   console.info('DEVICE CONNECT ', id)
   ws.closed = false
-
-
 }
 
 

@@ -152,24 +152,21 @@ SceneGameplay.buttonPressed = function (i) {
 }
 
 SceneGameplay.adjustBody=function (newBodyParts) {
-  console.log('ADJUSTING...')
+
   if(Object.keys(newBodyParts).length > 0){
     Object.keys(newBodyParts).forEach(function (key, index) {
-      console.log(key,newBodyParts[key])
       if (newBodyParts[key] ) {
         SceneGameplay.bodyparts[key] = newBodyParts[key]
-        console.log(SceneGameplay.bodyparts)
         SceneGameplay.body[key].visible = true
-        console.log('bpanim-'+newBodyParts[key]+'-'+key)
         SceneGameplay.body[key].play('bpanim-'+newBodyParts[key]+'-'+key);
       } else {
-        console.log('EMPTY')
+
         SceneGameplay.bodyparts[key] = 'EMPTY'
         SceneGameplay.body[key].visible = false
       }
 
     });
-    if (checkIfEqual (this.bodyparts) ) {
+    if (checkIfEqual (this.bodyparts) &&  !SceneGameplay.videoIsPlaying) {
       console.log('starting video');
 
       this.videoIsPlaying = true;
@@ -180,6 +177,8 @@ SceneGameplay.adjustBody=function (newBodyParts) {
         document.getElementById('my-video').classList.remove('display-none');
         document.getElementById('my-video').classList.add('display-block');
         videoPlayer.play();
+        videoPlayer.muted(false)
+    console.log(videoPlayer)
       },1000)
 
 
@@ -193,6 +192,7 @@ SceneGameplay.adjustBody=function (newBodyParts) {
 SceneGameplay.endVideo = function() {
     SceneGameplay.videoIsPlaying = false;
     console.log('video ended');
+  videoPlayer.muted(true)
     document.getElementById('my-video').classList.remove('display-block');
     document.getElementById('my-video').classList.add('display-none');
 }
