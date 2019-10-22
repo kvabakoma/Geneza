@@ -27,13 +27,13 @@ SceneGameplay.preload = function() {
     this.load.atlas('MATERIA', 'assets/img/MATERIA.png', 'assets/img/MATERIA.json');
     this.load.atlas('SAPIENS', 'assets/img/SAPIENS.png', 'assets/img/SAPIENS.json');
     this.load.atlas('SYSTEMA', 'assets/img/SYSTEMA.png', 'assets/img/SYSTEMA.json');
+    this.setupSounds();
 }
 
 SceneGameplay.create = function() {
     console.log("in SceneGameplay")
     this.scene.bringToTop('SceneGameplay'); // BRING GAMEPLAY SCENE TO TOP AFTER THE ASSETS HAVE LOADED
     this.setupAnims();
-    this.setupSounds();
     this.setupLevel();
     this.setupKeyboardControlls();
 }
@@ -56,7 +56,7 @@ SceneGameplay.setupAnims = function() {
     for (i = 0; i < this.races.length; i++) {
         for(j = 0; j < Object.keys(this.bodyparts).length; j++) {
             var bpart = Object.keys(this.bodyparts)[j];
-            console.log('bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
+            // console.log('bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
             this.anims.create({
 
                 key: 'bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j],
@@ -69,15 +69,17 @@ SceneGameplay.setupAnims = function() {
             });
         }
     }
-    console.log(this.anims);
 }
 
 SceneGameplay.setupSounds = function () {
     for (i = 0; i < this.races.length; i++) {
         for(j = 0; j < Object.keys(this.bodyparts).length; j++) {
             if (this.races[i].indexOf('ENTROPIA') >= 0) {
-                // console.log('sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
-                this.load.audio('sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j], 'assets/sounds/sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j]+'.wav');  // urls: an array of file url
+                /* console.log("*************************************************")
+                console.log('sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
+                console.log('assets/sounds/'+this.races[i]+"-"+Object.keys(this.bodyparts)[j]+'.wav') */
+                // console.log('assets/sounds/'+this.races[i]+"-"+encodeURIComponent(Object.keys(this.bodyparts)[j])+'.wav')
+                SceneGameplay.load.audio('sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j], 'assets/sounds/'+this.races[i]+"-"+encodeURIComponent(Object.keys(this.bodyparts)[j])+'.wav');  // urls: an array of file url
                 // this.sound.play('sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
             }
         }
@@ -159,7 +161,7 @@ SceneGameplay.buttonPressed = function (i) {
         this.videoIsPlaying = true;
         videoPlayer.play();*/
     }
-    console.log('bpanim-'+this.bodyparts[i]+'-'+i)
+    // console.log('bpanim-'+this.bodyparts[i]+'-'+i)
     this.body[i].play('bpanim-'+this.bodyparts[i]+'-'+i);
 
 }
@@ -172,6 +174,12 @@ SceneGameplay.adjustBody=function (newBodyParts) {
         SceneGameplay.bodyparts[key] = newBodyParts[key]
         SceneGameplay.body[key].visible = true
         SceneGameplay.body[key].play('bpanim-'+newBodyParts[key]+'-'+key);
+        
+        if (newBodyParts[key].indexOf('ENTROPIA') >= 0) { 
+            console.log('sound-'+newBodyParts[key]+'-'+key)
+            console.log(SceneGameplay.sound)
+            SceneGameplay.sound.play('sound-'+newBodyParts[key]+'-'+key) 
+        }
       } else {
 
         SceneGameplay.bodyparts[key] = 'EMPTY'
