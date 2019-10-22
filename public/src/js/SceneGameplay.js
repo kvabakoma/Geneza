@@ -178,9 +178,8 @@ SceneGameplay.adjustBody=function (newBodyParts) {
         document.getElementById('my-video').classList.add('display-block');
         videoPlayer.play();
        // videoPlayer.muted(false)
-    console.log(videoPlayer)
+        console.log(videoPlayer)
       },1000)
-
 
     }
   }
@@ -192,7 +191,7 @@ SceneGameplay.adjustBody=function (newBodyParts) {
 SceneGameplay.endVideo = function() {
     SceneGameplay.videoIsPlaying = false;
     console.log('video ended');
-  videoPlayer.muted(true)
+ // videoPlayer.muted(true)
     document.getElementById('my-video').classList.remove('display-block');
     document.getElementById('my-video').classList.add('display-none');
 }
