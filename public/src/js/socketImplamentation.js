@@ -4,8 +4,8 @@
 var exampleSocket;
 
 $(document).ready(function () {
-  //  exampleSocket = new WebSocket("ws://localhost:1337/client");
-  exampleSocket = new WebSocket("ws://localhost:3000/ws/geneza");
+  console.log("location.host",location.host)
+  exampleSocket = new WebSocket("ws://"+location.host+"/ws/geneza");
   exampleSocket.onmessage = function (event) {
     let message = JSON.parse(event.data)
      console.log(message)

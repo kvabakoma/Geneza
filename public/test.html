@@ -16,7 +16,7 @@
 
   $(document).ready(function () {
     //  exampleSocket = new WebSocket("ws://localhost:1337/client");
-    testSocket = new WebSocket("ws://localhost:3000/ws/test");
+    testSocket = new WebSocket("ws://"+location.host+"/ws/test");
     testSocket.onmessage = function (event) {
       let message = JSON.parse(event.data)
       console.log(message)

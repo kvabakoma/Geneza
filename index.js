@@ -35,8 +35,8 @@ app.ws('/', function(ws, req) {
 });
 
 app.use(express.static(__dirname + '/public'))
-app.listen(3000,function () {
-  console.log(`Server listening on port 3000`)
+app.listen(3030,function () {
+  console.log(`Server listening on port 3030`)
 
 
 });
