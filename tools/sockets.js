@@ -84,13 +84,24 @@ function handelBodyChange(comand,inital) {
     });
   }
   console.log(parts)
-  var data = {
-    type: 'body-move',
-    data: parts
+  if(!inital){
+    var data = {
+      type: 'body-move',
+      data: parts
+    }
+    console.log('CHANGED')
+    console.log(data)
+    sendToConnectedSocket(JSON.stringify(data), 'geneza')
+  } else{
+    var data = {
+      type: 'init',
+      data: parts
+    }
+    console.log('INIT')
+    console.log(data)
+    sendToConnectedSocket(JSON.stringify(data), 'geneza')
   }
-  console.log('CHANGED')
-  console.log(data)
-  sendToConnectedSocket(JSON.stringify(data), 'geneza')
+
 }
 
 function getDiff(prev, current,initial) {
@@ -140,9 +151,11 @@ function handelClientConnection(ws, req) {
   let id = req.params.id
   ws.id = id
   console.info('DEVICE CONNECT ', id)
-  /*setTimeout(function () {
+  setTimeout(function () {
     handelBodyChange(prevCommand.join(''),true)
-  },1500)*/
+  },2000)
+
+
 
   ws.closed = false
 }

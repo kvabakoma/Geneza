@@ -11,9 +11,13 @@ $(document).ready(function () {
      console.log(message)
 
     if(message['type']&&message['type']=='body-move'){
+      console.log(SceneGameplay)
       SceneGameplay.adjustBody(message['data'])
     }
-
+    if(message['type']&&message['type']=='init'){
+      console.log(SceneGameplay)
+      SceneGameplay.adjustBody(message['data'],true)
+    }
 
     //console.log(SceneGameplay.buttonPressed('HEAD'))
     //  handelSocketMessage(message)

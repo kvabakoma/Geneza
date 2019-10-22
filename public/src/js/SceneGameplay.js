@@ -166,7 +166,7 @@ SceneGameplay.buttonPressed = function (i) {
 
 }
 
-SceneGameplay.adjustBody=function (newBodyParts) {
+SceneGameplay.adjustBody=function (newBodyParts,init) {
 
   if(Object.keys(newBodyParts).length > 0){
     Object.keys(newBodyParts).forEach(function (key, index) {
@@ -174,11 +174,11 @@ SceneGameplay.adjustBody=function (newBodyParts) {
         SceneGameplay.bodyparts[key] = newBodyParts[key]
         SceneGameplay.body[key].visible = true
         SceneGameplay.body[key].play('bpanim-'+newBodyParts[key]+'-'+key);
-        
-        if (newBodyParts[key].indexOf('ENTROPIA') >= 0) { 
+
+        if (newBodyParts[key].indexOf('ENTROPIA') >= 0) {
             console.log('sound-'+newBodyParts[key]+'-'+key)
             console.log(SceneGameplay.sound)
-            SceneGameplay.sound.play('sound-'+newBodyParts[key]+'-'+key) 
+            SceneGameplay.sound.play('sound-'+newBodyParts[key]+'-'+key)
         }
       } else {
 
@@ -187,7 +187,7 @@ SceneGameplay.adjustBody=function (newBodyParts) {
       }
 
     });
-    if (checkIfEqual (this.bodyparts) &&  !SceneGameplay.videoIsPlaying) {
+    if (checkIfEqual (this.bodyparts) &&  !SceneGameplay.videoIsPlaying && !init) {
       console.log('starting video');
 
       this.videoIsPlaying = true;
