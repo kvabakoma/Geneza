@@ -9,8 +9,6 @@ SceneGameplay.init = function() {
     this.bodysounds = {'HEAD':'SAPIENS', 'ARM LEFT':'SAPIENS', 'ARM RIGHT':'SAPIENS', 'LEG LEFT':'SAPIENS', 'LEG RIGHT':'SAPIENS', 'BODY':'SAPIENS', 'CROUCH':'SAPIENS'};
     this.sounds = {};
     this.defaultSFXvolume = .5;
-    
-    
 }
 
 SceneGameplay.preload = function() {
@@ -31,7 +29,7 @@ SceneGameplay.preload = function() {
 }
 
 SceneGameplay.create = function() {
-    console.log("in SceneGameplay")
+    console.log("in SceneGameplay WEB")
     
     this.loadingContainer = this.add.container(game.config.width * .5, game.config.height * .5)
     .setDepth(99);
@@ -51,8 +49,7 @@ SceneGameplay.create = function() {
     .setScale(.35,.35)
     .setInteractive()
     .on('pointerdown', function (pointer, localX, localY, event) {
-        this.setupSounds();        
-        initSocket();
+        this.setupSounds();
         this.loadingContainer.destroy(true);
     }, this);  
     
@@ -63,10 +60,7 @@ SceneGameplay.create = function() {
     this.scene.bringToTop('SceneGameplay'); // BRING GAMEPLAY SCENE TO TOP AFTER THE ASSETS HAVE LOADED
     this.setupAnims();
     this.setupLevel();
-    this.setupKeyboardControlls();
-    
-    
-    
+    this.setupKeyboardControlls();    
 }
 
 SceneGameplay.update = function() {
@@ -111,15 +105,6 @@ SceneGameplay.loadSounds = function () {
 }
 
 SceneGameplay.setupSounds = function () {
-    
-    this.input.addDownCallback(function() {
-        console.log('in addDownCallback')
-        if (game.sound.context.state === 'suspended') {
-            game.sound.context.resume();
-            console.log("resumed autdio")
-        }
-        
-    });
     
     for (i = 0; i < this.races.length; i++) {
         for(j = 0; j < Object.keys(this.bodyparts).length; j++) {
@@ -173,42 +158,65 @@ SceneGameplay.setupLevel = function() {
 
 SceneGameplay.setupKeyboardControlls = function () {
     this.input.keyboard.on('keydown-' + 'A', function (event) {
-        this.buttonPressed(Object.keys(this.bodyparts)[0]);
+        this.buttonPressed(Object.keys(this.bodyparts)[0], false);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'S', function (event) {
-        this.buttonPressed(Object.keys(this.bodyparts)[1]);
+        this.buttonPressed(Object.keys(this.bodyparts)[1], false);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'D', function (event) {
-        this.buttonPressed(Object.keys(this.bodyparts)[2]);
+        this.buttonPressed(Object.keys(this.bodyparts)[2], false);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'F', function (event) {
-        this.buttonPressed(Object.keys(this.bodyparts)[3]);
+        this.buttonPressed(Object.keys(this.bodyparts)[3], false);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'G', function (event) {
-        this.buttonPressed(Object.keys(this.bodyparts)[4]);
+        this.buttonPressed(Object.keys(this.bodyparts)[4], false);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'H', function (event) {
-        this.buttonPressed(Object.keys(this.bodyparts)[5]);
+        this.buttonPressed(Object.keys(this.bodyparts)[5], false);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'J', function (event) {
-        this.buttonPressed(Object.keys(this.bodyparts)[6]);
+        this.buttonPressed(Object.keys(this.bodyparts)[6], false);
     }.bind(this));
 }
 
-SceneGameplay.buttonPressed = function (i) {
+SceneGameplay.buttonPressed = function (i, init) {
     console.log(i)
     if (this.videoIsPlaying) return;
+    
     this.bodyparts[i] = this.races[(this.races.indexOf(this.bodyparts[i]) + 1) % this.races.length]
-    if (checkIfEqual (this.bodyparts) && !SceneGameplay.videoIsPlaying && !init) {
-        
-    }
+
     this.body[i].play('bpanim-'+this.bodyparts[i]+'-'+i);
     
-}
-
-SceneGameplay.adjustBody=function (newBodyParts,init) {
+    console.log(i)
+    if (SceneGameplay.bodysounds[i].isPlaying) SceneGameplay.bodysounds[i].stop();
+    SceneGameplay.bodysounds[i] = SceneGameplay.sound.add('sound-'+this.bodyparts[i]+'-'+i, {
+        volume: SceneGameplay.defaultSFXvolume,
+        loop: true
+    });
+    if (game.sound.context.state === 'suspended') {
+        game.sound.context.resume();
+    }
+    SceneGameplay.bodysounds[i].play();
     
-    if (this.videoIsPlaying) return;
+    if (checkIfEqual (this.bodyparts) && !SceneGameplay.videoIsPlaying && !init) {
+        console.log('starting video');
+        
+        this.videoIsPlaying = true;
+        var videoSrc = '/assets/videos/'+ this.bodyparts["HEAD"]+'.mp4'
+        videoPlayer.src(videoSrc)
+        setTimeout(function () {
+            document.getElementById('my-video').classList.remove('display-none');
+            document.getElementById('my-video').classList.add('display-block');
+            videoPlayer.play();
+            videoPlayer.muted(false)
+            SceneGameplay.fadeOutVolume();
+        },1000)
+    }    
+    
+    /* ******************************************** */
+    
+    /* if (this.videoIsPlaying) return;
     
     if(Object.keys(newBodyParts).length > 0){
         Object.keys(newBodyParts).forEach(function (key, index) {
@@ -257,21 +265,15 @@ SceneGameplay.adjustBody=function (newBodyParts,init) {
                 SceneGameplay.fadeOutVolume();
             },1000)
         }
-    }
-    
+    } */
     
 }
-
 
 SceneGameplay.endVideo = function() {
     SceneGameplay.videoIsPlaying = false;
     console.log('video ended');
     document.getElementById('my-video').classList.remove('display-block');
     document.getElementById('my-video').classList.add('display-none');
-    sendToserver(JSON.stringify({
-        type:'video',
-        isPLaying:false
-    }))
     SceneGameplay.fadeInVolume();
 }
 

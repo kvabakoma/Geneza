@@ -9,7 +9,7 @@ var config = {
         height: 1080,
         pixelArt: true,
     },
-    scene: [SceneLoading,SceneGameplay],
+    scene: [SceneGameplay],
     physics: {
         default: false  // no physics system enabled
     },

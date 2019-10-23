@@ -20,8 +20,11 @@ app.use(function (req, res, next) {
   return next();
 });*/
 app.use(bodyParser.json())
-app.get('/', function(req, res){
+app.get('/museum', function(req, res){
   res.sendFile(__dirname +'/public/game.html');
+});
+app.get('/', function(req, res){
+  res.sendFile(__dirname +'/public/web.html');
 });
 app.post('/cmd', function(req, res){
   let cmd = req.body.cmd
@@ -36,7 +39,6 @@ app.ws('/', function(ws, req) {
   ws.on('message', function(msg) {
     console.log(msg);
   });
-
 });
 
 app.use(express.static(__dirname + '/public'))
