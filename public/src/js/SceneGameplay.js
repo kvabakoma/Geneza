@@ -31,14 +31,14 @@ SceneGameplay.create = function() {
     this.setupAnims();
     this.setupLevel();
     this.setupKeyboardControlls();
-    
+
     this.setupSounds();
-    
+
     initSocket();
 }
 
 SceneGameplay.update = function() {
-    
+
 }
 
 SceneGameplay.setupAnims = function() {
@@ -51,13 +51,13 @@ SceneGameplay.setupAnims = function() {
         frameRate: 12,
         repeat: -1
     });
-    
+
     for (i = 0; i < this.races.length; i++) {
         for(j = 0; j < Object.keys(this.bodyparts).length; j++) {
             var bpart = Object.keys(this.bodyparts)[j];
             // console.log('bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
             this.anims.create({
-                
+
                 key: 'bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j],
                 frames: this.anims.generateFrameNames(this.races[i], {
                     start: 1, end: 16,
@@ -95,38 +95,38 @@ SceneGameplay.setupLevel = function() {
     .setPosition(game.config.width*.5)
     .setScale(1.08,1.08);
     this.sceneFrame.play('frameAnim');
-    
+
     this.body['HEAD'] = this.add.sprite(game.config.width*.502, game.config.height * .182, 'SAPIENS', 'HEAD/HEAD_1.png')
     .setOrigin(.5,.5)
     .setDepth(7);
-    
+
     this.body['ARM LEFT'] = this.add.sprite(game.config.width*.26, game.config.height * .357, 'SAPIENS', 'ARM LEFT/ARM LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(3);
-    
+
     this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, 'SAPIENS', 'ARM RIGHT/ARM RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(4);
-    
+
     this.body['BODY'] = this.add.sprite(game.config.width*.503, game.config.height * .289, 'SAPIENS', 'BODY/BODY_1.png')
     .setOrigin(.5,.5)
     .setDepth(6);
-    
+
     this.body['CROUCH'] = this.add.sprite(game.config.width*.503, game.config.height * .518, 'SAPIENS', 'CROUCH/CROUCH_1.png')
     .setOrigin(.5,.5)
     .setDepth(5);
-    
+
     this.body['LEG LEFT'] = this.add.sprite(game.config.width*.463, game.config.height * .735, 'SAPIENS', 'LEG LEFT/LEG LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(1);
-    
+
     this.body['LEG RIGHT'] = this.add.sprite(game.config.width*.549, game.config.height * .735, 'SAPIENS', 'LEG RIGHT/LEG RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(2);
-    
+
     /* this.template = this.add.image(game.config.width * .5, game.config.height*.5, 'TEMPLATE')
     .setOrigin(.5,.5); */
-    
+
 }
 
 SceneGameplay.setupKeyboardControlls = function () {
@@ -161,57 +161,60 @@ SceneGameplay.buttonPressed = function (i) {
 
     }
     this.body[i].play('bpanim-'+this.bodyparts[i]+'-'+i);
-    
+
 }
 
 SceneGameplay.adjustBody=function (newBodyParts,init) {
-    
+
     if (this.videoIsPlaying) return;
-    
+
     if(Object.keys(newBodyParts).length > 0){
         Object.keys(newBodyParts).forEach(function (key, index) {
             if (newBodyParts[key] ) {
-                
+
                 SceneGameplay.bodyparts[key] = newBodyParts[key]
                 SceneGameplay.body[key].visible = true
                 SceneGameplay.body[key].play('bpanim-'+newBodyParts[key]+'-'+key);
-                
+
                 if (SceneGameplay.bodysounds[key].isPlaying) SceneGameplay.bodysounds[key].stop();
                 SceneGameplay.bodysounds[key] = SceneGameplay.sound.add('sound-'+newBodyParts[key]+'-'+key, {
                     volume: SceneGameplay.defaultSFXvolume,
                     loop: true
                 });
                 SceneGameplay.bodysounds[key].play();
-                
+
             } else {
-                
+
                 SceneGameplay.bodyparts[key] = null
                 SceneGameplay.body[key].visible = false
                 if (SceneGameplay.bodysounds[key].isPlaying) SceneGameplay.bodysounds[key].stop();
             }
-            
+
         });
-        
-        
-        
+
+
+
         if (checkIfEqual (this.bodyparts) && !SceneGameplay.videoIsPlaying && !init) {
             console.log('starting video');
-            
+
             this.videoIsPlaying = true;
             var videoSrc = '/assets/videos/'+ this.bodyparts["HEAD"]+'.mp4'
-            
+             sendToserver(JSON.stringify({
+               type:'video',
+               isPLaying:true
+             }))
             videoPlayer.src(videoSrc)
             setTimeout(function () {
                 document.getElementById('my-video').classList.remove('display-none');
                 document.getElementById('my-video').classList.add('display-block');
                 videoPlayer.play();
-                console.log(videoPlayer)
+
                 SceneGameplay.fadeOutVolume();
             },1000)
         }
     }
-    
-    
+
+
 }
 
 
@@ -220,6 +223,10 @@ SceneGameplay.endVideo = function() {
     console.log('video ended');
     document.getElementById('my-video').classList.remove('display-block');
     document.getElementById('my-video').classList.add('display-none');
+  sendToserver(JSON.stringify({
+    type:'video',
+    isPLaying:false
+  }))
     SceneGameplay.fadeInVolume();
 }
 
@@ -236,7 +243,7 @@ function getRandomElement(arr) {
 }
 
 function photoEpilepsy() {
-    
+
 }
 
 SceneGameplay.stopSFX = function () {
@@ -257,7 +264,7 @@ SceneGameplay.fadeOutVolume = function() {
         setTimeout(function(){
             SceneGameplay.fadeOutVolume();
         },40);
-    } 
+    }
 }
 
 SceneGameplay.fadeInVolume = function() {
@@ -270,6 +277,6 @@ SceneGameplay.fadeInVolume = function() {
         setTimeout(function(){
             SceneGameplay.fadeInVolume();
         },40);
-    } 
+    }
 }
 

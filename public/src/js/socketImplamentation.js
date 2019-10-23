@@ -4,21 +4,26 @@
 var exampleSocket;
 
 function initSocket(){
-  console.log("location.host",location.host)
+
   exampleSocket = new WebSocket("ws://"+location.host+"/ws/geneza");
   exampleSocket.onmessage = function (event) {
     let message = JSON.parse(event.data)
-      console.log(message)
+
 
     if(message['type']&&message['type']=='body-move'){
-      console.log(SceneGameplay)
+
       SceneGameplay.adjustBody(message['data'])
     }
     if(message['type']&&message['type']=='init'){
-      console.log(SceneGameplay)
+
       SceneGameplay.adjustBody(message['data'],true)
     }
   }
+}
+
+
+function sendToserver(data) {
+  exampleSocket.send(data)
 }
 
 

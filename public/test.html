@@ -19,14 +19,14 @@
     testSocket = new WebSocket("ws://"+location.host+"/ws/test");
     testSocket.onmessage = function (event) {
       let message = JSON.parse(event.data)
-      console.log(message)
+
       //  handelSocketMessage(message)
     }
 
   })
  function sendToSocket() {
    var testMessage = document.getElementById('test').value
-    console.log(testMessage)
+
    testSocket.send(testMessage);
  }
 

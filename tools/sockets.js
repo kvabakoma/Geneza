@@ -4,12 +4,12 @@
 
 let connections = {}
 let socketsInstance
-
+var isPlayingVideo = false
 var races = ['SAPIENS', 'SYSTEMA', 'ENTROPIA', 'AHRIMAN', 'MATERIA', 'ANIMA', 'GENEZA'];
 var bodyparts = ['HEAD', 'ARM LEFT', 'ARM RIGHT', 'LEG LEFT', 'LEG RIGHT', 'BODY', 'CROUCH'];
 var prevCommand = [1, 1, 1, 1, 1, 1, 1]
 module.exports = {
-  changeBody:handelBodyChange,
+  changeBody: handelBodyChange,
   getSockets: GetAllSockets,
   sendToSocket: sendToConnectedSocket,
   getSocketById: getSocketConnectionById,
@@ -30,7 +30,7 @@ module.exports = {
 
           clearInterval(pingInterval);
 
-          console.log('PING ' + error.message, ws.id)
+
         }
       }, 15000)
 
@@ -51,6 +51,11 @@ module.exports = {
         if (ws.id == 'test') {
           handelBodyChange(msg)
         }
+
+        if (ws.id = 'geneza') {
+         let msgObject = JSON.parse(msg)
+          isPlayingVideo = msgObject.isPLaying
+        }
       });
       ws.on('close', function () {
         console.log('CLOSE CONNECTION ', ws.id)
@@ -64,15 +69,17 @@ module.exports = {
 }
 
 
-function handelBodyChange(comand,inital) {
-  console.log(comand)
+function handelBodyChange(comand, inital) {
+  if (isPlayingVideo) {
+
+    return
+  }
   var cmd = comand.split('')
 
-  var changed = getDiff(prevCommand, cmd,inital)
+  var changed = getDiff(prevCommand, cmd, inital)
   prevCommand = cmd
   var parts = {}
-  console.log('OBJECT LEN')
-  console.log(Object.keys(changed).length)
+
   if (Object.keys(changed).length > 0) {
     Object.keys(changed).forEach(function (key, index) {
       if (changed[key] > 0) {
@@ -83,35 +90,30 @@ function handelBodyChange(comand,inital) {
 
     });
   }
-  console.log(parts)
-  if(!inital){
+  if (!inital) {
     var data = {
       type: 'body-move',
       data: parts
     }
-    console.log('CHANGED')
-    console.log(data)
     sendToConnectedSocket(JSON.stringify(data), 'geneza')
-  } else{
+  } else {
     var data = {
       type: 'init',
       data: parts
     }
-    console.log('INIT')
-    console.log(data)
     sendToConnectedSocket(JSON.stringify(data), 'geneza')
   }
 
 }
 
-function getDiff(prev, current,initial) {
+function getDiff(prev, current, initial) {
   var diff = {}
   for (var i = 0; i < prev.length; i++) {
-    if(!initial){
+    if (!initial) {
       if (prev[i] != current[i]) {
         diff[i] = current[i]
       }
-    } else{
+    } else {
       diff[i] = current[i]
     }
 
@@ -123,8 +125,8 @@ function getDiff(prev, current,initial) {
 function sendToConnectedSocket(data, socketId, ind) {
 
   let sockets = getSocketConnectionById(socketId)
-  if (sockets.length){
-    sockets.forEach((socket, index)=>{
+  if (sockets.length) {
+    sockets.forEach((socket, index) => {
       socket.send(data)
     })
   }
@@ -151,7 +153,7 @@ function handelClientConnection(ws, req) {
   let id = req.params.id
   ws.id = id
   console.info('DEVICE CONNECT ', id)
-  handelBodyChange(prevCommand.join(''),true)
+  handelBodyChange(prevCommand.join(''), true)
 
   ws.closed = false
 }

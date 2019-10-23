@@ -36,14 +36,12 @@ app.ws('/', function(ws, req) {
   ws.on('message', function(msg) {
     console.log(msg);
   });
-  console.log('socket', req.testing);
+
 });
 
 app.use(express.static(__dirname + '/public'))
 app.listen(3030,function () {
   console.log(`Server listening on port 3030`)
-
-
 });
 sockets.handelSocketConnections(app,expressWs)
 sockets.setSocketServer(expressWs)
