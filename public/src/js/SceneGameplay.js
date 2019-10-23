@@ -1,12 +1,3 @@
-/*
-0. declare races: races[ahriman, ]
-1. declare videos array: videos[ahriman, anima...]
-2. declare bodyparts array: bodyparts[left_hand] = ahriman
-3. load spritesheets: left_hand[0] = ahriman anim; left_hand[1] =
-4. write input controller
-5. on bodypart change, check if the same, if different - change, if different - check if all parts are with the same race and play video
-*/
-
 var SceneGameplay = new Phaser.Scene('SceneGameplay');
 
 SceneGameplay.init = function() {
@@ -166,14 +157,9 @@ SceneGameplay.buttonPressed = function (i) {
     console.log(i)
     if (this.videoIsPlaying) return;
     this.bodyparts[i] = this.races[(this.races.indexOf(this.bodyparts[i]) + 1) % this.races.length]
-    if (checkIfEqual (this.bodyparts) ) {
-        /* console.log('starting video');
-        document.getElementById('my-video').classList.remove('display-none');
-        document.getElementById('my-video').classList.add('display-block');
-        this.videoIsPlaying = true;
-        videoPlayer.play();*/
+    if (checkIfEqual (this.bodyparts) && !SceneGameplay.videoIsPlaying && !init) {
+
     }
-    // console.log('bpanim-'+this.bodyparts[i]+'-'+i)
     this.body[i].play('bpanim-'+this.bodyparts[i]+'-'+i);
     
 }
@@ -219,9 +205,8 @@ SceneGameplay.adjustBody=function (newBodyParts,init) {
                 document.getElementById('my-video').classList.remove('display-none');
                 document.getElementById('my-video').classList.add('display-block');
                 videoPlayer.play();
-                // videoPlayer.muted(false)
                 console.log(videoPlayer)
-                SceneGameplay.stopSFX();
+                SceneGameplay.fadeOutVolume();
             },1000)
         }
     }
@@ -233,14 +218,9 @@ SceneGameplay.adjustBody=function (newBodyParts,init) {
 SceneGameplay.endVideo = function() {
     SceneGameplay.videoIsPlaying = false;
     console.log('video ended');
-    // videoPlayer.muted(true)
     document.getElementById('my-video').classList.remove('display-block');
     document.getElementById('my-video').classList.add('display-none');
-    for (i = 0; i < Object.values(SceneGameplay.bodysounds).length; i++) {
-        if (Object.values(SceneGameplay.bodysounds)[i] != null) {
-            Object.values(SceneGameplay.bodysounds)[i].play();
-        }
-    }
+    SceneGameplay.fadeInVolume();
 }
 
 function checkIfEqual (bodyparts) {
@@ -267,20 +247,29 @@ SceneGameplay.stopSFX = function () {
     }
 }
 
-function fadeOutVolume(obj) {
+SceneGameplay.fadeOutVolume = function() {
     var muted = true;
-    for (i = 0; i < Object.values(obj).length; i++) {
-        Object.values(obj)[i].setVolume(Object.values(obj)[i].volume - .05);
-        if (Object.values(obj)[i].volume > 0) muted = false;
+    for (i = 0; i < Object.values(SceneGameplay.bodysounds).length; i++) {
+        Object.values(SceneGameplay.bodysounds)[i].setVolume(Object.values(SceneGameplay.bodysounds)[i].volume - .0125);
+        if (Object.values(SceneGameplay.bodysounds)[i].volume > 0) muted = false;
     }
     if (!muted) {
         setTimeout(function(){
-            fadeOutVolume(obj);
-        },50);
+            SceneGameplay.fadeOutVolume();
+        },40);
     } 
 }
 
-function fadeInVolume() {
-    
+SceneGameplay.fadeInVolume = function() {
+    var muted = true;
+    for (i = 0; i < Object.values(SceneGameplay.bodysounds).length; i++) {
+        Object.values(SceneGameplay.bodysounds)[i].setVolume(Object.values(SceneGameplay.bodysounds)[i].volume + .0125);
+        if (Object.values(SceneGameplay.bodysounds)[i].volume < SceneGameplay.defaultSFXvolume) muted = false;
+    }
+    if (!muted) {
+        setTimeout(function(){
+            SceneGameplay.fadeInVolume();
+        },40);
+    } 
 }
 
