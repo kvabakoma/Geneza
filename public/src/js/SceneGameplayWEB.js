@@ -3,13 +3,31 @@ var SceneGameplay = new Phaser.Scene('SceneGameplay');
 SceneGameplay.init = function() {
     console.log(game.config.height)
     this.races = ['SAPIENS','SYSTEMA', 'ENTROPIA', 'AHRIMAN','MATERIA','ANIMA','GENEZA' ];
-    this.bodyparts = {'HEAD':'SAPIENS', 'ARM LEFT':'SAPIENS', 'ARM RIGHT':'SAPIENS', 'LEG LEFT':'SAPIENS', 'LEG RIGHT':'SAPIENS', 'BODY':'SAPIENS', 'CROUCH':'SAPIENS'};
+    this.bodyparts = {
+        'HEAD':this.getRandomRace(),
+        'ARM LEFT':this.getRandomRace(),
+        'ARM RIGHT':this.getRandomRace(),
+        'LEG LEFT':this.getRandomRace(),
+        'LEG RIGHT':this.getRandomRace(),
+        'BODY':this.getRandomRace(),
+        'CROUCH':this.getRandomRace()
+    };
+    console.log(this.bodyparts)
     this.body = {};
     this.videoIsPlaying = false;
     this.bodySounds = {};
-    this.bodysounds = {'HEAD':'SAPIENS', 'ARM LEFT':'SAPIENS', 'ARM RIGHT':'SAPIENS', 'LEG LEFT':'SAPIENS', 'LEG RIGHT':'SAPIENS', 'BODY':'SAPIENS', 'CROUCH':'SAPIENS'};
+    this.bodysounds = {
+        'HEAD':this.bodyparts['HEAD'],
+        'ARM LEFT':this.bodyparts['ARM LEFT'],
+        'ARM RIGHT':this.bodyparts['ARM RIGHT'],
+        'LEG LEFT':this.bodyparts['LEG LEFT'],
+        'LEG RIGHT':this.bodyparts['LEG RIGHT'],
+        'BODY':this.bodyparts['BODY'],
+        'CROUCH':this.bodyparts['CROUCH']};
     this.sounds = {};
     this.defaultSFXvolume = .5;
+
+    console.log( this.races[Math.floor(Math.random()*this.races.length)] )
 }
 
 SceneGameplay.preload = function() {
@@ -37,7 +55,7 @@ SceneGameplay.create = function() {
     .setDepth(99);
     
     var graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xaa0000 }, fillStyle: { color: 0x000000 } });
-    var rect = new Phaser.Geom.Rectangle(game.config.width * -.4, game.config.height * -.4, game.config.width*.8, game.config.height*.8)
+    var rect = new Phaser.Geom.Rectangle(game.config.width * -.45, game.config.height * -.45, game.config.width*.9, game.config.height*.9)
     graphics.fillRectShape(rect);
     
     // this.add.sprite(game.config.width*.502, game.config.height * .182, 'SAPIENS', 'HEAD/HEAD_1.png')
@@ -127,31 +145,31 @@ SceneGameplay.setupLevel = function() {
     .setScale(1.08,1.08);
     this.sceneFrame.play('frameAnim');
     
-    this.body['HEAD'] = this.add.sprite(game.config.width*.502, game.config.height * .182, 'SAPIENS', 'HEAD/HEAD_1.png')
+    this.body['HEAD'] = this.add.sprite(game.config.width*.502, game.config.height * .182, this.bodyparts['HEAD'], 'HEAD/HEAD_1.png')
     .setOrigin(.5,.5)
     .setDepth(7);
     
-    this.body['ARM LEFT'] = this.add.sprite(game.config.width*.26, game.config.height * .357, 'SAPIENS', 'ARM LEFT/ARM LEFT_1.png')
+    this.body['ARM LEFT'] = this.add.sprite(game.config.width*.26, game.config.height * .357, this.bodyparts['ARM LEFT'], 'ARM LEFT/ARM LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(3);
     
-    this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, 'SAPIENS', 'ARM RIGHT/ARM RIGHT_1.png')
+    this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, this.bodyparts['ARM RIGHT'], 'ARM RIGHT/ARM RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(4);
     
-    this.body['BODY'] = this.add.sprite(game.config.width*.503, game.config.height * .289, 'SAPIENS', 'BODY/BODY_1.png')
+    this.body['BODY'] = this.add.sprite(game.config.width*.503, game.config.height * .289, this.bodyparts['BODY'], 'BODY/BODY_1.png')
     .setOrigin(.5,.5)
     .setDepth(6);
     
-    this.body['CROUCH'] = this.add.sprite(game.config.width*.503, game.config.height * .518, 'SAPIENS', 'CROUCH/CROUCH_1.png')
+    this.body['CROUCH'] = this.add.sprite(game.config.width*.503, game.config.height * .518, this.bodyparts['CROUCH'], 'CROUCH/CROUCH_1.png')
     .setOrigin(.5,.5)
     .setDepth(5);
     
-    this.body['LEG LEFT'] = this.add.sprite(game.config.width*.463, game.config.height * .735, 'SAPIENS', 'LEG LEFT/LEG LEFT_1.png')
+    this.body['LEG LEFT'] = this.add.sprite(game.config.width*.463, game.config.height * .735, this.bodyparts['LEG LEFT'], 'LEG LEFT/LEG LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(1);
     
-    this.body['LEG RIGHT'] = this.add.sprite(game.config.width*.549, game.config.height * .735, 'SAPIENS', 'LEG RIGHT/LEG RIGHT_1.png')
+    this.body['LEG RIGHT'] = this.add.sprite(game.config.width*.549, game.config.height * .735, this.bodyparts['LEG RIGHT'], 'LEG RIGHT/LEG RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(2);
     
@@ -229,7 +247,7 @@ SceneGameplay.buttonPressed = function (i, init) {
         console.log('starting video');
         
         this.videoIsPlaying = true;
-        var videoSrc = '/assets/videos/'+ this.bodyparts["HEAD"]+'.mp4'
+        var videoSrc = 'assets/videos/'+ this.bodyparts["HEAD"]+'.mp4'
         videoPlayer.src(videoSrc)
         setTimeout(function () {
             document.getElementById('my-video').classList.remove('display-none');
@@ -238,60 +256,7 @@ SceneGameplay.buttonPressed = function (i, init) {
             videoPlayer.muted(false)
             SceneGameplay.fadeOutVolume();
         },1000)
-    }    
-    
-    /* ******************************************** */
-    
-    /* if (this.videoIsPlaying) return;
-    
-    if(Object.keys(newBodyParts).length > 0){
-        Object.keys(newBodyParts).forEach(function (key, index) {
-            if (newBodyParts[key] ) {
-                
-                SceneGameplay.bodyparts[key] = newBodyParts[key]
-                SceneGameplay.body[key].visible = true
-                SceneGameplay.body[key].play('bpanim-'+newBodyParts[key]+'-'+key);
-                
-                if (SceneGameplay.bodysounds[key].isPlaying) SceneGameplay.bodysounds[key].stop();
-                SceneGameplay.bodysounds[key] = SceneGameplay.sound.add('sound-'+newBodyParts[key]+'-'+key, {
-                    volume: SceneGameplay.defaultSFXvolume,
-                    loop: true
-                });
-                if (game.sound.context.state === 'suspended') {
-                    game.sound.context.resume();
-                }
-                SceneGameplay.bodysounds[key].play();
-                
-            } else {
-                
-                SceneGameplay.bodyparts[key] = null
-                SceneGameplay.body[key].visible = false
-                if (SceneGameplay.bodysounds[key].isPlaying) SceneGameplay.bodysounds[key].stop();
-            }
-            
-        });
-        
-        
-        
-        if (checkIfEqual (this.bodyparts) && !SceneGameplay.videoIsPlaying && !init) {
-            console.log('starting video');
-            
-            this.videoIsPlaying = true;
-            var videoSrc = '/assets/videos/'+ this.bodyparts["HEAD"]+'.mp4'
-            sendToserver(JSON.stringify({
-                type:'video',
-                isPLaying:true
-            }))
-            videoPlayer.src(videoSrc)
-            setTimeout(function () {
-                document.getElementById('my-video').classList.remove('display-none');
-                document.getElementById('my-video').classList.add('display-block');
-                videoPlayer.play();
-                videoPlayer.muted(false)
-                SceneGameplay.fadeOutVolume();
-            },1000)
-        }
-    } */
+    }   
     
 }
 
@@ -331,7 +296,7 @@ SceneGameplay.fadeOutVolume = function() {
     var muted = true;
     for (i = 0; i < Object.values(SceneGameplay.bodysounds).length; i++) {
         Object.values(SceneGameplay.bodysounds)[i].setVolume(Object.values(SceneGameplay.bodysounds)[i].volume - .0125);
-        if (Object.values(SceneGameplay.bodysounds)[i].volume > 0) muted = false;
+        if (i == Object.values(SceneGameplay.bodysounds).length - 1 && Object.values(SceneGameplay.bodysounds)[i].volume > 0) muted = false;
     }
     if (!muted) {
         setTimeout(function(){
@@ -344,12 +309,16 @@ SceneGameplay.fadeInVolume = function() {
     var muted = true;
     for (i = 0; i < Object.values(SceneGameplay.bodysounds).length; i++) {
         Object.values(SceneGameplay.bodysounds)[i].setVolume(Object.values(SceneGameplay.bodysounds)[i].volume + .0125);
-        if (Object.values(SceneGameplay.bodysounds)[i].volume < SceneGameplay.defaultSFXvolume) muted = false;
+        if (i == Object.values(SceneGameplay.bodysounds).length - 1 && Object.values(SceneGameplay.bodysounds)[i].volume < SceneGameplay.defaultSFXvolume) muted = false;
     }
     if (!muted) {
         setTimeout(function(){
             SceneGameplay.fadeInVolume();
         },40);
     }
+}
+
+SceneGameplay.getRandomRace = function () {
+    return this.races[Math.floor(Math.random()*this.races.length)];
 }
 
