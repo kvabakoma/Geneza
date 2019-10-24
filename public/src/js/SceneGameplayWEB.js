@@ -145,31 +145,31 @@ SceneGameplay.setupLevel = function() {
     .setScale(1.08,1.08);
     this.sceneFrame.play('frameAnim');
     
-    this.body['HEAD'] = this.add.sprite(game.config.width*.502, game.config.height * .182, this.bodyparts['HEAD'], 'HEAD/HEAD_1.png')
+    this.body['HEAD'] = this.add.sprite(game.config.width*.502, game.config.height * .182, 'ui', 'Head.png')
     .setOrigin(.5,.5)
     .setDepth(7);
     
-    this.body['ARM LEFT'] = this.add.sprite(game.config.width*.26, game.config.height * .357, this.bodyparts['ARM LEFT'], 'ARM LEFT/ARM LEFT_1.png')
+    this.body['ARM LEFT'] = this.add.sprite(game.config.width*.26, game.config.height * .357, 'ui', 'Left Arm.png')
     .setOrigin(.5,.5)
     .setDepth(3);
     
-    this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, this.bodyparts['ARM RIGHT'], 'ARM RIGHT/ARM RIGHT_1.png')
+    this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, 'ui', 'Right Arm.png')
     .setOrigin(.5,.5)
     .setDepth(4);
     
-    this.body['BODY'] = this.add.sprite(game.config.width*.503, game.config.height * .289, this.bodyparts['BODY'], 'BODY/BODY_1.png')
+    this.body['BODY'] = this.add.sprite(game.config.width*.503, game.config.height * .289, 'ui', 'Body.png')
     .setOrigin(.5,.5)
     .setDepth(6);
     
-    this.body['CROUCH'] = this.add.sprite(game.config.width*.503, game.config.height * .518, this.bodyparts['CROUCH'], 'CROUCH/CROUCH_1.png')
+    this.body['CROUCH'] = this.add.sprite(game.config.width*.503, game.config.height * .518, 'ui', 'Hip.png')
     .setOrigin(.5,.5)
     .setDepth(5);
     
-    this.body['LEG LEFT'] = this.add.sprite(game.config.width*.463, game.config.height * .735, this.bodyparts['LEG LEFT'], 'LEG LEFT/LEG LEFT_1.png')
+    this.body['LEG LEFT'] = this.add.sprite(game.config.width*.463, game.config.height * .735, 'ui', 'Left Leg.png')
     .setOrigin(.5,.5)
     .setDepth(1);
     
-    this.body['LEG RIGHT'] = this.add.sprite(game.config.width*.549, game.config.height * .735, this.bodyparts['LEG RIGHT'], 'LEG RIGHT/LEG RIGHT_1.png')
+    this.body['LEG RIGHT'] = this.add.sprite(game.config.width*.549, game.config.height * .735, 'ui', 'Right Leg.png')
     .setOrigin(.5,.5)
     .setDepth(2);
     

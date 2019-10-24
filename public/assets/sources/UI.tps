@@ -132,7 +132,7 @@
             <key>json</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../ui/ui.json</filename>
+                <filename>../img/ui.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -182,12 +182,48 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">UI/Body.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>88,98,175,195</rect>
+                <key>scale9Paddings</key>
+                <rect>88,98,175,195</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">UI/Head.png</key>
             <key type="filename">UI/Hip.png</key>
-            <key type="filename">UI/LeftArm.png</key>
-            <key type="filename">UI/LeftLeg.png</key>
-            <key type="filename">UI/RightArm.png</key>
-            <key type="filename">UI/RightLeg.png</key>
+            <key type="filename">UI/Left Arm.png</key>
+            <key type="filename">UI/Left Leg.png</key>
+            <key type="filename">UI/Right Leg.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>88,88,175,175</rect>
+                <key>scale9Paddings</key>
+                <rect>88,88,175,175</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">UI/Right Arm.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>105,186,210,373</rect>
+                <key>scale9Paddings</key>
+                <rect>105,186,210,373</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">UI/loading.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -220,11 +256,11 @@
             <filename>UI/Body.png</filename>
             <filename>UI/Head.png</filename>
             <filename>UI/Hip.png</filename>
-            <filename>UI/LeftArm.png</filename>
-            <filename>UI/LeftLeg.png</filename>
+            <filename>UI/Left Arm.png</filename>
+            <filename>UI/Left Leg.png</filename>
             <filename>UI/loading.png</filename>
-            <filename>UI/RightArm.png</filename>
-            <filename>UI/RightLeg.png</filename>
+            <filename>UI/Right Arm.png</filename>
+            <filename>UI/Right Leg.png</filename>
             <filename>UI/start.png</filename>
         </array>
         <key>ignoreFileList</key>
