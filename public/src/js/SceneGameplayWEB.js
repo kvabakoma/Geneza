@@ -54,6 +54,7 @@ SceneGameplay.create = function() {
     .on('pointerdown', function (pointer, localX, localY, event) {
         this.setupSounds();
         this.loadingContainer.destroy(true);
+        document.getElementById('buttons').style.display = "flex";
     }, this);  
     
     this.loadingContainer.add(graphics)
@@ -160,7 +161,7 @@ SceneGameplay.setupLevel = function() {
 }
 
 SceneGameplay.setupKeyboardControlls = function () {
-    /* this.input.keyboard.on('keydown-' + 'A', function (event) {
+    this.input.keyboard.on('keydown-' + 'A', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[0], false);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'S', function (event) {
@@ -180,7 +181,7 @@ SceneGameplay.setupKeyboardControlls = function () {
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'J', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[6], false);
-    }.bind(this)); */
+    }.bind(this));
 
     $('#btnHead').click(function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[0], false);
