@@ -303,7 +303,7 @@ SceneGameplay.fadeOutVolume = function() {
     var muted = true;
     for (i = 0; i < Object.values(SceneGameplay.bodysounds).length; i++) {
         Object.values(SceneGameplay.bodysounds)[i].setVolume(Object.values(SceneGameplay.bodysounds)[i].volume - .0125);
-        if (Object.values(SceneGameplay.bodysounds)[i].volume > 0) muted = false;
+        if (i == Object.values(SceneGameplay.bodysounds).length - 1 && Object.values(SceneGameplay.bodysounds)[i].volume > 0) muted = false;
     }
     if (!muted) {
         setTimeout(function(){
@@ -316,7 +316,7 @@ SceneGameplay.fadeInVolume = function() {
     var muted = true;
     for (i = 0; i < Object.values(SceneGameplay.bodysounds).length; i++) {
         Object.values(SceneGameplay.bodysounds)[i].setVolume(Object.values(SceneGameplay.bodysounds)[i].volume + .0125);
-        if (Object.values(SceneGameplay.bodysounds)[i].volume < SceneGameplay.defaultSFXvolume) muted = false;
+        if (i == Object.values(SceneGameplay.bodysounds).length - 1 && Object.values(SceneGameplay.bodysounds)[i].volume < SceneGameplay.defaultSFXvolume) muted = false;
     }
     if (!muted) {
         setTimeout(function(){
