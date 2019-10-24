@@ -210,18 +210,27 @@ SceneGameplay.setupKeyboardControlls = function () {
     $('#btnArmRight').click(function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[2], false);
     }.bind(this));
-    $('#btnBody').click(function (event) {
+    $('#btnLegLeft').click(function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[3], false);
     }.bind(this));
-    $('#btnCrouch').click(function (event) {
+    $('#btnLegRight').click(function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[4], false);
     }.bind(this));
-    $('#btnLegLeft').click(function (event) {
+    $('#btnBody').click(function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[5], false);
     }.bind(this));
-    $('#btnLegRight').click(function (event) {
+    $('#btnCrouch').click(function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[6], false);
     }.bind(this));
+    
+
+    /* 'HEAD':this.getRandomRace(),
+        'ARM LEFT':this.getRandomRace(),
+        'ARM RIGHT':this.getRandomRace(),
+        'LEG LEFT':this.getRandomRace(),
+        'LEG RIGHT':this.getRandomRace(),
+        'BODY':this.getRandomRace(),
+        'CROUCH':this.getRandomRace() */
 }
 
 SceneGameplay.buttonPressed = function (i, init) {
