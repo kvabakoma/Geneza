@@ -79,10 +79,10 @@ SceneGameplay.create = function() {
     this.loadingContainer.add(this.titleImg)
     this.loadingContainer.add(this.startBtn)
     
-    this.scene.bringToTop('SceneGameplay'); // BRING GAMEPLAY SCENE TO TOP AFTER THE ASSETS HAVE LOADED
     this.setupAnims();
     this.setupLevel();
     this.setupKeyboardControlls();    
+    this.scene.bringToTop('SceneGameplay'); // BRING GAMEPLAY SCENE TO TOP AFTER THE ASSETS HAVE LOADED
 }
 
 SceneGameplay.update = function() {
