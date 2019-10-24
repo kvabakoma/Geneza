@@ -1,6 +1,7 @@
 var SceneGameplay = new Phaser.Scene('SceneGameplay');
 
 SceneGameplay.init = function() {
+    console.log(game.config.height)
     this.races = ['SAPIENS','SYSTEMA', 'ENTROPIA', 'AHRIMAN','MATERIA','ANIMA','GENEZA' ];
     this.bodyparts = {'HEAD':'SAPIENS', 'ARM LEFT':'SAPIENS', 'ARM RIGHT':'SAPIENS', 'LEG LEFT':'SAPIENS', 'LEG RIGHT':'SAPIENS', 'BODY':'SAPIENS', 'CROUCH':'SAPIENS'};
     this.body = {};
@@ -12,8 +13,8 @@ SceneGameplay.init = function() {
 }
 
 SceneGameplay.preload = function() {
-    this.load.image('loading', 'assets/ui/loading.png');
-    this.load.image('startBtn', 'assets/ui/start.png')
+
+    this.load.atlas('ui', 'assets/img/ui.png', 'assets/img/ui.json');
     
     this.cameras.main.setBackgroundColor('#000');
     this.load.image('TEMPLATE', 'assets/img/TAMPLATE_transparent_SAPIENS.png');
@@ -26,6 +27,7 @@ SceneGameplay.preload = function() {
     this.load.atlas('SAPIENS', 'assets/img/SAPIENS.png', 'assets/img/SAPIENS.json');
     this.load.atlas('SYSTEMA', 'assets/img/SYSTEMA.png', 'assets/img/SYSTEMA.json');
     this.loadSounds();
+
 }
 
 SceneGameplay.create = function() {
@@ -38,12 +40,13 @@ SceneGameplay.create = function() {
     var rect = new Phaser.Geom.Rectangle(game.config.width * -.4, game.config.height * -.4, game.config.width*.8, game.config.height*.8)
     graphics.fillRectShape(rect);
     
-    this.titleImg = this.add.image(0, 0, 'loading')
+    // this.add.sprite(game.config.width*.502, game.config.height * .182, 'SAPIENS', 'HEAD/HEAD_1.png')
+    this.titleImg = this.add.sprite(0, 0, 'ui', 'loading.png')
     .setOrigin(.5,.5)
     .setPosition(0,0)
     .setScale(.35,.35);
     
-    this.startBtn = this.add.image(0, 0, 'startBtn')
+    this.startBtn = this.add.image(0, 0, 'ui','start.png')
     .setOrigin(.5,.5)
     .setPosition(0, game.config.height * .2)
     .setScale(.35,.35)
@@ -157,7 +160,7 @@ SceneGameplay.setupLevel = function() {
 }
 
 SceneGameplay.setupKeyboardControlls = function () {
-    this.input.keyboard.on('keydown-' + 'A', function (event) {
+    /* this.input.keyboard.on('keydown-' + 'A', function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[0], false);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'S', function (event) {
@@ -176,6 +179,28 @@ SceneGameplay.setupKeyboardControlls = function () {
         this.buttonPressed(Object.keys(this.bodyparts)[5], false);
     }.bind(this));
     this.input.keyboard.on('keydown-' + 'J', function (event) {
+        this.buttonPressed(Object.keys(this.bodyparts)[6], false);
+    }.bind(this)); */
+
+    $('#btnHead').click(function (event) {
+        this.buttonPressed(Object.keys(this.bodyparts)[0], false);
+    }.bind(this));
+    $('#btnArmLeft').click(function (event) {
+        this.buttonPressed(Object.keys(this.bodyparts)[1], false);
+    }.bind(this));
+    $('#btnArmRight').click(function (event) {
+        this.buttonPressed(Object.keys(this.bodyparts)[2], false);
+    }.bind(this));
+    $('#btnBody').click(function (event) {
+        this.buttonPressed(Object.keys(this.bodyparts)[3], false);
+    }.bind(this));
+    $('#btnCrouch').click(function (event) {
+        this.buttonPressed(Object.keys(this.bodyparts)[4], false);
+    }.bind(this));
+    $('#btnLegLeft').click(function (event) {
+        this.buttonPressed(Object.keys(this.bodyparts)[5], false);
+    }.bind(this));
+    $('#btnLegRight').click(function (event) {
         this.buttonPressed(Object.keys(this.bodyparts)[6], false);
     }.bind(this));
 }

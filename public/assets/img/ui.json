@@ -1,0 +1,209 @@
+{
+	"textures": [
+		{
+			"image": "ui.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 1806,
+				"h": 1806
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Body.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 600,
+						"h": 600
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 600,
+						"h": 600
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 600,
+						"h": 600
+					}
+				},
+				{
+					"filename": "Head.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 600,
+						"h": 600
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 600,
+						"h": 600
+					},
+					"frame": {
+						"x": 1,
+						"y": 603,
+						"w": 600,
+						"h": 600
+					}
+				},
+				{
+					"filename": "Hip.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 600,
+						"h": 600
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 600,
+						"h": 600
+					},
+					"frame": {
+						"x": 1,
+						"y": 1205,
+						"w": 600,
+						"h": 600
+					}
+				},
+				{
+					"filename": "LeftArm.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 600,
+						"h": 600
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 600,
+						"h": 600
+					},
+					"frame": {
+						"x": 603,
+						"y": 1,
+						"w": 600,
+						"h": 600
+					}
+				},
+				{
+					"filename": "LeftLeg.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 600,
+						"h": 600
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 600,
+						"h": 600
+					},
+					"frame": {
+						"x": 603,
+						"y": 603,
+						"w": 600,
+						"h": 600
+					}
+				},
+				{
+					"filename": "RightArm.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 600,
+						"h": 600
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 600,
+						"h": 600
+					},
+					"frame": {
+						"x": 603,
+						"y": 1205,
+						"w": 600,
+						"h": 600
+					}
+				},
+				{
+					"filename": "RightLeg.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 600,
+						"h": 600
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 600,
+						"h": 600
+					},
+					"frame": {
+						"x": 1205,
+						"y": 1,
+						"w": 600,
+						"h": 600
+					}
+				},
+				{
+					"filename": "loading.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 600,
+						"h": 600
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 600,
+						"h": 600
+					},
+					"frame": {
+						"x": 1205,
+						"y": 603,
+						"w": 600,
+						"h": 600
+					}
+				},
+				{
+					"filename": "start.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 559,
+						"h": 233
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 559,
+						"h": 233
+					},
+					"frame": {
+						"x": 1205,
+						"y": 1205,
+						"w": 559,
+						"h": 233
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:3b336ddb64aa206484116a564ac34c42:ef28790e890f64089e7aab375c497701:5b04aa198265472a3c5f56958d78e97b$"
+	}
+}
