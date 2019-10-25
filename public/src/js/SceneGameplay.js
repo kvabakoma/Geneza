@@ -9,14 +9,14 @@ SceneGameplay.init = function() {
     this.bodysounds = {'HEAD':'SAPIENS', 'ARM LEFT':'SAPIENS', 'ARM RIGHT':'SAPIENS', 'LEG LEFT':'SAPIENS', 'LEG RIGHT':'SAPIENS', 'BODY':'SAPIENS', 'CROUCH':'SAPIENS'};
     this.sounds = {};
     this.defaultSFXvolume = .5;
-    
-    
+
+
 }
 
 SceneGameplay.preload = function() {
-    this.load.image('loading', 'assets/ui/loading.png');
-    this.load.image('startBtn', 'assets/ui/start.png')
-    
+   /* this.load.image('loading', 'assets/ui/loading.png');
+    this.load.image('startBtn', 'assets/ui/start.png')*/
+  this.load.atlas('ui', 'assets/img/ui.png', 'assets/img/ui.json');
     this.cameras.main.setBackgroundColor('#000');
     this.load.image('TEMPLATE', 'assets/img/TAMPLATE_transparent_SAPIENS.png');
     this.load.atlas('frame', 'assets/img/frame.png', 'assets/img/frame.json');
@@ -32,45 +32,60 @@ SceneGameplay.preload = function() {
 
 SceneGameplay.create = function() {
     console.log("in SceneGameplay")
-    
+
     this.loadingContainer = this.add.container(game.config.width * .5, game.config.height * .5)
     .setDepth(99);
-    
+
     var graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xaa0000 }, fillStyle: { color: 0x000000 } });
     var rect = new Phaser.Geom.Rectangle(game.config.width * -.4, game.config.height * -.4, game.config.width*.8, game.config.height*.8)
     graphics.fillRectShape(rect);
-    
-    this.titleImg = this.add.image(0, 0, 'loading')
+  this.titleImg = this.add.sprite(0, 0, 'ui', 'loading.png')
     .setOrigin(.5,.5)
     .setPosition(0,0)
     .setScale(.35,.35);
-    
+
+  this.startBtn = this.add.image(0, 0, 'ui','start.png')
+    .setOrigin(.5,.5)
+    .setPosition(0, game.config.height * .2)
+    .setScale(.35,.35)
+    .setInteractive()
+    .on('pointerdown', function (pointer, localX, localY, event) {
+      this.setupSounds();
+      initSocket();
+      this.loadingContainer.destroy(true);
+      //   document.getElementById('buttons').style.display = "flex";
+    }, this);
+   /* this.titleImg = this.add.image(0, 0, 'loading')
+    .setOrigin(.5,.5)
+    .setPosition(0,0)
+    .setScale(.35,.35);
+
     this.startBtn = this.add.image(0, 0, 'startBtn')
     .setOrigin(.5,.5)
     .setPosition(0, game.config.height * .2)
     .setScale(.35,.35)
     .setInteractive()
     .on('pointerdown', function (pointer, localX, localY, event) {
-        this.setupSounds();        
+        this.setupSounds();
         initSocket();
         this.loadingContainer.destroy(true);
-    }, this);  
-    
+    }, this);*/
+
     this.loadingContainer.add(graphics)
     this.loadingContainer.add(this.titleImg)
     this.loadingContainer.add(this.startBtn)
-    
+
     this.scene.bringToTop('SceneGameplay'); // BRING GAMEPLAY SCENE TO TOP AFTER THE ASSETS HAVE LOADED
     this.setupAnims();
     this.setupLevel();
     this.setupKeyboardControlls();
-    
-    
-    
+
+
+
 }
 
 SceneGameplay.update = function() {
-    
+
 }
 
 SceneGameplay.setupAnims = function() {
@@ -83,13 +98,13 @@ SceneGameplay.setupAnims = function() {
         frameRate: 12,
         repeat: -1
     });
-    
+
     for (i = 0; i < this.races.length; i++) {
         for(j = 0; j < Object.keys(this.bodyparts).length; j++) {
             var bpart = Object.keys(this.bodyparts)[j];
             // console.log('bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j])
             this.anims.create({
-                
+
                 key: 'bpanim-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j],
                 frames: this.anims.generateFrameNames(this.races[i], {
                     start: 1, end: 16,
@@ -111,16 +126,16 @@ SceneGameplay.loadSounds = function () {
 }
 
 SceneGameplay.setupSounds = function () {
-    
+
     this.input.addDownCallback(function() {
         console.log('in addDownCallback')
         if (game.sound.context.state === 'suspended') {
             game.sound.context.resume();
             console.log("resumed autdio")
         }
-        
+
     });
-    
+
     for (i = 0; i < this.races.length; i++) {
         for(j = 0; j < Object.keys(this.bodyparts).length; j++) {
             SceneGameplay.bodySounds['sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j]] = SceneGameplay.sound.add('sound-'+this.races[i]+"-"+Object.keys(this.bodyparts)[j], {
@@ -137,38 +152,38 @@ SceneGameplay.setupLevel = function() {
     .setPosition(game.config.width*.5)
     .setScale(1.08,1.08);
     this.sceneFrame.play('frameAnim');
-    
+
     this.body['HEAD'] = this.add.sprite(game.config.width*.502, game.config.height * .182, 'SAPIENS', 'HEAD/HEAD_1.png')
     .setOrigin(.5,.5)
     .setDepth(7);
-    
+
     this.body['ARM LEFT'] = this.add.sprite(game.config.width*.26, game.config.height * .357, 'SAPIENS', 'ARM LEFT/ARM LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(3);
-    
+
     this.body['ARM RIGHT'] = this.add.sprite(game.config.width*.775, game.config.height * .478, 'SAPIENS', 'ARM RIGHT/ARM RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(4);
-    
+
     this.body['BODY'] = this.add.sprite(game.config.width*.503, game.config.height * .289, 'SAPIENS', 'BODY/BODY_1.png')
     .setOrigin(.5,.5)
     .setDepth(6);
-    
+
     this.body['CROUCH'] = this.add.sprite(game.config.width*.503, game.config.height * .518, 'SAPIENS', 'CROUCH/CROUCH_1.png')
     .setOrigin(.5,.5)
     .setDepth(5);
-    
+
     this.body['LEG LEFT'] = this.add.sprite(game.config.width*.463, game.config.height * .735, 'SAPIENS', 'LEG LEFT/LEG LEFT_1.png')
     .setOrigin(.5,.5)
     .setDepth(1);
-    
+
     this.body['LEG RIGHT'] = this.add.sprite(game.config.width*.549, game.config.height * .735, 'SAPIENS', 'LEG RIGHT/LEG RIGHT_1.png')
     .setOrigin(.5,.5)
     .setDepth(2);
-    
+
     /* this.template = this.add.image(game.config.width * .5, game.config.height*.5, 'TEMPLATE')
     .setOrigin(.5,.5); */
-    
+
 }
 
 SceneGameplay.setupKeyboardControlls = function () {
@@ -200,24 +215,24 @@ SceneGameplay.buttonPressed = function (i) {
     if (this.videoIsPlaying) return;
     this.bodyparts[i] = this.races[(this.races.indexOf(this.bodyparts[i]) + 1) % this.races.length]
     if (checkIfEqual (this.bodyparts) && !SceneGameplay.videoIsPlaying && !init) {
-        
+
     }
     this.body[i].play('bpanim-'+this.bodyparts[i]+'-'+i);
-    
+
 }
 
 SceneGameplay.adjustBody=function (newBodyParts,init) {
-    
+
     if (this.videoIsPlaying) return;
-    
+
     if(Object.keys(newBodyParts).length > 0){
         Object.keys(newBodyParts).forEach(function (key, index) {
             if (newBodyParts[key] ) {
-                
+
                 SceneGameplay.bodyparts[key] = newBodyParts[key]
                 SceneGameplay.body[key].visible = true
                 SceneGameplay.body[key].play('bpanim-'+newBodyParts[key]+'-'+key);
-                
+
                 if (SceneGameplay.bodysounds[key].isPlaying) SceneGameplay.bodysounds[key].stop();
                 SceneGameplay.bodysounds[key] = SceneGameplay.sound.add('sound-'+newBodyParts[key]+'-'+key, {
                     volume: SceneGameplay.defaultSFXvolume,
@@ -227,21 +242,21 @@ SceneGameplay.adjustBody=function (newBodyParts,init) {
                     game.sound.context.resume();
                 }
                 SceneGameplay.bodysounds[key].play();
-                
+
             } else {
-                
+
                 SceneGameplay.bodyparts[key] = null
                 SceneGameplay.body[key].visible = false
                 if (SceneGameplay.bodysounds[key].isPlaying) SceneGameplay.bodysounds[key].stop();
             }
-            
+
         });
-        
-        
-        
+
+
+
         if (checkIfEqual (this.bodyparts) && !SceneGameplay.videoIsPlaying && !init) {
             console.log('starting video');
-            
+
             this.videoIsPlaying = true;
             var videoSrc = '/assets/videos/'+ this.bodyparts["HEAD"]+'.mp4'
             sendToserver(JSON.stringify({
@@ -258,8 +273,8 @@ SceneGameplay.adjustBody=function (newBodyParts,init) {
             },1000)
         }
     }
-    
-    
+
+
 }
 
 
@@ -288,7 +303,7 @@ function getRandomElement(arr) {
 }
 
 function photoEpilepsy() {
-    
+
 }
 
 SceneGameplay.stopSFX = function () {
