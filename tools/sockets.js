@@ -6,7 +6,7 @@ let connections = {}
 let socketsInstance
 var isPlayingVideo = false
 var races = ['SAPIENS', 'SYSTEMA', 'ENTROPIA', 'AHRIMAN', 'MATERIA', 'ANIMA', 'GENEZA'];
-var bodyparts = ['HEAD', 'ARM LEFT', 'ARM RIGHT', 'LEG LEFT', 'LEG RIGHT', 'BODY', 'CROUCH'];
+var bodyparts = ['HEAD', 'ARM LEFT', 'ARM RIGHT', 'BODY', 'LEG RIGHT', 'LEG LEFT', 'CROUCH'];
 var prevCommand = [1, 1, 1, 1, 1, 1, 1]
 module.exports = {
   changeBody: handelBodyChange,
