@@ -3,25 +3,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!--
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137885854-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      
-      gtag('config', 'UA-137885854-1');
-    </script>
-  -->
   
   
   <title>Geneza</title>
   <meta name="description" content="Geneza by Nikola Radulovikj" />
   <meta name="author" content="kvaba.com" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.17.0/phaser.min.js"></script>
+  <script src="src/js/jquery.min.js"></script>
+  <script src="src/js/phaser.min.js"></script>
   
   <script src="src/js/socketImplamentation.js"></script>
   <script src="src/js/SceneLoading.js"></script>
@@ -29,7 +18,7 @@
   <script src="src/js/main.js"></script>
   
   <link rel="stylesheet" type="text/css" href="src/css/style.css" />
-  <link href="https://vjs.zencdn.net/7.5.5/video-js.css" rel="stylesheet" />
+  <link href="src/css/video-js.css" rel="stylesheet" />
   
 </head>
 
@@ -49,7 +38,7 @@
   </div>
   <div id="rotate-phone"><img src="">&nbsp;</div>
   
-  <script src='https://vjs.zencdn.net/7.5.5/video.js'></script>
+  <script src='src/js/video.js'></script>
   <script>
     var videoPlayer;
     videojs('my-video').ready(function() {
